@@ -120,6 +120,6 @@ const FlowControls: React.FC<FlowControlsProps> = ({
       />
     </div>
   );
-};
+}; 
 
 export default FlowControls;
