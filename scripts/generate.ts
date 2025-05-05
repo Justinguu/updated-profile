@@ -4,12 +4,12 @@ dotenv.config({ path: ".env.local" });
 import { DocumentInterface } from "@langchain/core/documents";
 import { JSONLoader } from "langchain/document_loaders/fs/json";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { getEmbeddingsCollection, getVectorStore } from "../src/lib/supabase";
+import { getEmbeddingsCollection, getWriteVectorStore } from "../src/lib/supabase";
 
 async function generateEmbeddings() {
   try {
     console.log("Starting embeddings generation...");
-    const vectorStore = await getVectorStore();
+    const vectorStore = await getWriteVectorStore();
     
     // Clear existing documents from Supabase
     console.log("Clearing existing documents...");
