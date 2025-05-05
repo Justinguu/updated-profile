@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-import { Home, BookOpen, Box, Code } from "lucide-react";
+import { Home, BookOpen, Box, Code, FileText } from "lucide-react";
 import Image from "next/image";
 
 const navLinks = [
   { name: "Home", href: "/", icon: Home },
   { name: "Blog", href: "/blog", icon: BookOpen },
   { name: "Stack Architect", href: "/tech-stack-architect", icon: Box },
+  { name: "Resume", href: "/resume", icon: FileText },
 ];
 
 export default function Navbar() {
