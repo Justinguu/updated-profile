@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Code className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-              <span className="ml-2 text-xl font-bold">Justin's Portfolio</span>
+              <span className="ml-2 text-xl font-bold">Justin&apos;s Portfolio</span>
             </Link>
           </div>
           <div className="hidden md:block">

@@ -110,9 +110,7 @@ const FlowControls: React.FC<FlowControlsProps> = ({
           className="p-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
           title="Export Image"
         >
-          <span role="img" aria-label="Export image">
-            <Image size={20} aria-hidden="true" />
-          </span>
+          <Image size={20} />
         </button>
       </div>
       <SaveStackDialog 
