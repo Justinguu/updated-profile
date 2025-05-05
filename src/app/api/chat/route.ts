@@ -17,6 +17,13 @@ import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import { createHistoryAwareRetriever } from "langchain/chains/history_aware_retriever";
 import { createRetrievalChain } from "langchain/chains/retrieval";
 
+// Check if we have the necessary environment variables
+const hasSupabaseEnv = 
+  typeof process.env.SUPABASE_URL === 'string' && 
+  process.env.SUPABASE_URL.length > 0 &&
+  typeof process.env.OPENAI_API_KEY === 'string' && 
+  process.env.OPENAI_API_KEY.length > 0;
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
