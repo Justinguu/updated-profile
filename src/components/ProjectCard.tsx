@@ -16,7 +16,7 @@ interface ProjectCardProps {
   forks: number;
   lastUpdated: string;
 }
-
+ 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
