@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 import { getSortedPostsData, getPostData, getAllPostIds } from '../../../../utils/markdown';
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-react";
-import heroImage from "@/assets/Ahmed.jpeg";
+import heroImage from "@/assets/Justin-optimized.png";
 
 interface BlogPostProps {
   params: { id: string };
@@ -130,6 +130,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
                   alt={postData.author}
                   width={80}
                   height={80}
+                  quality={90}
                   className="rounded-full mr-6"
                 />
                 <div>

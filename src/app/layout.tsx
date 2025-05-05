@@ -9,10 +9,18 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Ahmed Oublihi",
-    default: "Ahmed Oublihi",
+    template: "%s | Justin Gu",
+    default: "Justin Gu",
   },
   description: "Check out my smart portfolio website with a custom AI chatbot.",
+  icons: {
+    icon: [
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      }
+    ]
+  },
 };
 
 export default function RootLayout({
@@ -22,6 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+      </head>
       <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />

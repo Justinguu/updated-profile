@@ -6,64 +6,67 @@ interface TimelineItem {
   organization: string;
   date: string;
   location?: string;
-  description?: string;
+  description?: string[];
   skills?: string[];
 }
 
 const educationItems: TimelineItem[] = [
   {
     type: 'education',
-    title: 'Vocational Training in Application Development',
-    organization: 'Schulzentrum SII Utbremen Bremen',
-    date: 'Aug 2021 - May 2024',
-    description: 'Dual education: Theory and practice in Full Stack Development. Focus on modern web technologies and agile software development practices.',
-    skills: ['JavaScript', 'React', 'Node.js', 'SQL', 'Agile Methodologies']
+    title: 'Full Stack Software Engineering',
+    organization: 'App Academy',
+    date: 'Feb 2022 - Nov 2022',
+    description: ['Completed mastery of rigerous coding, algorithms, and real-world applications in team-oriented environments.'],
+    skills: ['JavaScript', 'Python', 'React', 'Redux', 'SQL', 'Agile Methodologies']
+
   },
   {
     type: 'education',
-    title: 'Bachelor in Networks and Telecommunications',
-    organization: 'Université du Littoral Côte d\'Opale',
-    date: 'Oct 2018 - Nov 2019',
-    description: 'French state diploma focusing on network administration, IT security, and web development. Preparation for CISCO certifications (CCNA1 to CCNA4).',
-    skills: ['Network Administration', 'IT Security', 'PHP', 'MySQL', 'Project Management', 'CISCO CCNA']
+    title: 'Business Administration',
+    organization: 'Georgia State University',
+    date: 'Aug 2014 - Jul 2017',
+    description: ['No Degree, Completed class work in business administration and management, due to personal reasons.'],
+    skills: ['SEO', 'SCRUM', 'PowerBI', 'SQL', 'Project Management']
+
   },
-  {
-    type: 'education',
-    title: 'Training in Computer Development Techniques',
-    organization: 'OFPPT Ouarzazate',
-    date: 'Sep 2016 - Jul 2018',
-    description: 'Comprehensive training in IT skills, including programming, web development, database management, and networks.',
-    skills: ['C#', 'HTML', 'CSS', 'JavaScript', 'SQL', 'WordPress', 'Bootstrap', 'UML']
-  }
+
 ];
+
 
 const experienceItems: TimelineItem[] = [
   {
     type: 'experience',
-    title: 'Full Stack Developer',
-    organization: 'ePhilos AG',
-    date: 'Aug 2021 - Present · 2 years 8 months',
-    location: 'Bremen, Germany · Hybrid',
-    description: 'Responsible for the further development of Comfortmarkt (CM), a software based on PHP, Ext JS, Webix, and MySQL. Optimization of database queries and performance. Implementation of new features focusing on user-friendliness. Application of best practices in software development and code optimization. Conducting unit tests and collaborating on CI/CD processes.',
-    skills: ['PHP', 'Ext JS', 'Webix', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Unit Testing']
+    title: 'Software Engineer',
+    organization: 'Global Med Logistics',
+    date: 'Feb 2024 - Present',
+    description: [
+      'Designed and deployed automated inventory management and email reporting systems, enhancing operational workflows and achieving significant cost reductions.',
+      'Maintained backend systems and databases for medical devices, ensuring reliability and performance.',
+      'Implemented Azure cloud architectures, enabling scalable and secure data management.'
+    ],
+    skills: ['Azure', 'Automation', 'Backend Development', 'Database Management']
   },
   {
     type: 'experience',
-    title: 'Web Developer',
-    organization: 'Freelancer',
-    date: 'Mar 2020 - Jun 2021 · 1 year 4 months',
-    location: 'Remote - Morocco',
-    description: 'Development of responsive websites (HTML, CSS, Bootstrap, jQuery, WordPress). Customizations and SEO optimization. Close collaboration with clients to implement tailored solutions.',
-    skills: ['HTML', 'CSS', 'Bootstrap', 'jQuery', 'WordPress', 'SEO', 'Client Communication']
+    title: 'Website Developer Intern',
+    organization: 'Engaj Media',
+    date: 'May 2023 - Dec 2023',
+    description: [
+      'Designed and developed a front-end landing page using TypeScript, npm, Figma, and React, fostering trust and confidence among visitors, leading them to request complimentary consultations and audits.',
+      'Managed and implemented an HR dashboard incorporating employee information, announcements, and recent activities.'
+    ],
+    skills: ['TypeScript', 'npm', 'Figma', 'React', 'UI/UX Design']
   },
   {
     type: 'experience',
-    title: 'NodeJS Developer (Internship)',
-    organization: 'HM Communication',
-    date: 'Jul 2019 - Sep 2019 · 3 months',
-    location: 'Marrakech, Morocco',
-    description: 'Development of web applications with Node.js and Express.js. Working with MongoDB and RESTful APIs.',
-    skills: ['Node.js', 'Express.js', 'MongoDB', 'RESTful APIs', 'Git']
+    title: 'Freelance Software Engineer',
+    organization: 'YongMen Law P.C',
+    date: 'Dec 2022 - Mar 2023',
+    description: [
+      'Architected a dynamic company website utilizing JavaScript libraries, and React, specializing in immigration law, while also seamlessly integrating email functionality.',
+      'Boosted website traffic and engagement by 25% through ongoing Google Analytic-driven optimizations, resulting in increased client inquiries and fostering the law firm\'s growth and success.'
+    ],
+    skills: ['JavaScript', 'React', 'Email Integration', 'Google Analytics', 'SEO']
   }
 ];
 const TimelineItem: React.FC<{ item: TimelineItem }> = ({ item }) => (
@@ -78,7 +81,11 @@ const TimelineItem: React.FC<{ item: TimelineItem }> = ({ item }) => (
         <p className="text-sm text-gray-500 dark:text-gray-500">{item.location}</p>
       )}
       {item.description && (
-        <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">{item.description}</p>
+        <ul className="mt-2 text-sm text-gray-700 dark:text-gray-300 list-disc list-inside">
+          {item.description.map((desc, index) => (
+            <li key={index}>{desc}</li>
+          ))}
+        </ul>
       )}
       {item.skills && (
         <div className="mt-2 flex flex-wrap gap-2">

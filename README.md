@@ -50,7 +50,7 @@ Before you begin, ensure you have:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/medevs/smart-portfolio.git
+   git clone https://github.com/justin/smart-portfolio.git
    cd smart-portfolio
    ```
 
@@ -125,7 +125,7 @@ Before you begin, ensure you have:
    # or
    yarn dev
    ```
-   The application will be available at `http://localhost:3000`
+   The application will be available at `http://localhost:3004`
 
 6. **Build for Production**
    ```bash

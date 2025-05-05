@@ -5,11 +5,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-import { Home, Briefcase, BookOpen, Github, FileText, Box } from "lucide-react";
+import { Home, BookOpen, Box, Code } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Projects", href: "/projects", icon: Briefcase },
   { name: "Blog", href: "/blog", icon: BookOpen },
   { name: "Stack Architect", href: "/tech-stack-architect", icon: Box },
 ];
@@ -22,8 +22,9 @@ export default function Navbar() {
       <nav className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-3xl font-bold">
-              ⵣ
+            <Link href="/" className="flex items-center">
+              <Code className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+              <span className="ml-2 text-xl font-bold">Justin's Portfolio</span>
             </Link>
           </div>
           <div className="hidden md:block">

@@ -3,10 +3,10 @@ import AboutMe from '@/components/AboutMe';
 import Technologies from '@/components/Technologies';
 import FeaturedProjects from '@/components/FeaturedProjects';
 import LatestPosts from '@/components/LatestPosts';
-import GitHubStats from '@/components/GitHubStats';
+import SkillsOverview from '@/components/SkillsOverview';
 import Timeline from '@/components/Timeline';
 import Languages from '@/components/Languages';
-import Hobbies from '@/components/Hobbies';
+import ContactMe from '@/components/ContactMe';
 
 const HomePage: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
           <AboutMe />
         </div>
         <div>
-          <GitHubStats />
+          <Technologies />
         </div>
       </div>
 
@@ -28,9 +28,9 @@ const HomePage: React.FC = () => {
           <FeaturedProjects />
         </div>
 
-        {/* Technologies Stack */}
+        {/* Skills Overview */}
         <div>
-          <Technologies />
+          <SkillsOverview />
         </div>
 
         {/* Timeline - Spans full width */}
@@ -48,9 +48,9 @@ const HomePage: React.FC = () => {
           <Languages />
         </div>
 
-        {/* Hobbies */}
+        {/* Contact Info - Spans full width */}
         <div className="lg:col-span-3">
-          <Hobbies />
+          <ContactMe />
         </div>
       </div>
     </main>
