@@ -8,7 +8,7 @@ export default function Projects() {
         <h1 className="text-5xl font-bold mb-24 text-center">
           🧑‍💻Projects
         </h1>
-        <ProjectsGrid />
+        <ProjectsGrid /> 
       </main>
     </div>
   )
