@@ -12,7 +12,7 @@ interface SkillCategory {
   }>;
   color: string;
 }
-
+ 
 const SkillsOverview: React.FC = () => {
   const skillCategories: SkillCategory[] = [
     {
