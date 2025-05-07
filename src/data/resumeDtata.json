@@ -16,21 +16,21 @@
       "position": "Software Engineer",
       "startDate": "Feb 2024",
       "endDate": "Present",
-      "description": "• Designed and deployed automated inventory management and email reporting systems, enhancing operational workflows and achieving significant cost reductions.\n• Maintained backend systems and databases for medical devices, ensuring reliability and performance.\n• Implemented Azure cloud architectures, enabling scalable and secure data management."
+      "description": "• Led full lifecycle migration from Virtual Machines to containerized architecture (Docker → Azure Container Apps Jobs) making deployments 5x faster while cutting costs by 80%.\n• Built an automated shipment data pipeline with Azure Container Apps Jobs, reducing manual processing by 40% through scheduled containerized workflows.\n• Engineered a high-availability API gateway (Azure API Management + Functions) that enabled real-time tracking across third-party partners, reducing integration errors.\n• Collaborated with Stryker to enhance medical device tracking reliability, achieving 99.9% uptime and 100% data accuracy for 10k+ monthly transactions."
     },
     {
       "company": "Engaj Media",
       "position": "Website Developer Intern",
       "startDate": "May 2023",
       "endDate": "Dec 2023",
-      "description": "• Designed and developed a front-end landing page using TypeScript, npm, Figma, and React, fostering trust and confidence among visitors, leading them to request complimentary consultations and audits.\n• Managed and implemented an HR dashboard incorporating employee information, announcements, and recent activities."
+      "description": "• Worked within an Agile (Scrum) team to deliver a high-performance TypeScript/React landing page, implementing lazy loading and component optimization to Increase consultation requests by 35%.\n• Optimized website performance through code refactoring and modern development practices, ensuring cross-browser compatibility and mobile responsiveness."
     },
     {
       "company": "YongMen Law P.C",
       "position": "Freelance Software Engineer",
       "startDate": "Dec 2022",
       "endDate": "Mar 2023",
-      "description": "• Architected a dynamic company website utilizing JavaScript libraries, and React, specializing in immigration law, while also seamlessly integrating email functionality.\n• Boosted website traffic and engagement by 25% through ongoing Google Analytic-driven optimizations, resulting in increased client inquiries and fostering the law firm's growth and success."
+      "description": "• Developed client communication system integrating Mailchimp API for automated email workflows, reducing manual follow-ups by 30%.\n• Optimized website performance by diagnosing issues via Google Analytics (e.g., bounce rates, exit pages) and implementing UI/SEO fixes that grew traffic 25% MoM."
     }
   ],
   "education": [
@@ -46,7 +46,7 @@
       "degree": "Business Administration",
       "startDate": "2013",
       "endDate": "2017",
-      "description": ""
+      "description": "Coursework in Business Management / No Degree"
     }
   ],
   "skills": [
