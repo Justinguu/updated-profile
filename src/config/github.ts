@@ -26,7 +26,7 @@ export const githubConfig = {
     'zelp',
     // 'awesome-project'
   ] as string[],
-  
+   
   // Whether to show forked repositories
   showForkedRepositories: true,
   
