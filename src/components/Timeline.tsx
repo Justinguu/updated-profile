@@ -40,9 +40,10 @@ const experienceItems: TimelineItem[] = [
     organization: 'Global Med Logistics',
     date: 'Feb 2024 - Present',
     description: [
-      'Designed and deployed automated inventory management and email reporting systems, enhancing operational workflows and achieving significant cost reductions.',
-      'Maintained backend systems and databases for medical devices, ensuring reliability and performance.',
-      'Implemented Azure cloud architectures, enabling scalable and secure data management.'
+      'Led full lifecycle migration from Virtual Machines to containerized architecture (Docker → Azure Container Apps Jobs) making deployments 5x faster while cutting costs by 80%.',
+      'Built an automated shipment data pipeline with Azure Container Apps Jobs, reducing manual processing by 40% through scheduled containerized workflows.".',
+      'Engineered a high-availability API gateway (Azure API Management + Functions) that enabled real-timetracking across third-party partners, reducing integration errors.',
+      'Collaborated with Stryker to enhance medical device tracking reliability, achieving 99.9% uptime and 100% data accuracy for 10k+ monthly transactions.'
     ],
     skills: ['Azure', 'Automation', 'Backend Development', 'Database Management']
   },
@@ -52,8 +53,8 @@ const experienceItems: TimelineItem[] = [
     organization: 'Engaj Media',
     date: 'May 2023 - Dec 2023',
     description: [
-      'Designed and developed a front-end landing page using TypeScript, npm, Figma, and React, fostering trust and confidence among visitors, leading them to request complimentary consultations and audits.',
-      'Managed and implemented an HR dashboard incorporating employee information, announcements, and recent activities.'
+      'Worked within an Agile (Scrum) team to deliver a high-performance TypeScript/React landing page, implementing lazy loading and component optimization to Increase consultation requests by 35%',
+      ' Optimized website performance through code refactoring and modern development practices, ensuring cross-browser compatibility and mobile responsiveness'
     ],
     skills: ['TypeScript', 'npm', 'Figma', 'React', 'UI/UX Design']
   },
@@ -63,8 +64,8 @@ const experienceItems: TimelineItem[] = [
     organization: 'YongMen Law P.C',
     date: 'Dec 2022 - Mar 2023',
     description: [
-      'Architected a dynamic company website utilizing JavaScript libraries, and React, specializing in immigration law, while also seamlessly integrating email functionality.',
-      'Boosted website traffic and engagement by 25% through ongoing Google Analytic-driven optimizations, resulting in increased client inquiries and fostering the law firm\'s growth and success.'
+      'Developed client communication system integrating Mailchimp API for automated email workflows, reducing manual follow-ups by 30%',
+      'Optimized website performance by diagnosing issues via Google Analytics (e.g., bounce rates, exit pages) and implementing UI/SEO fixes that grew traffic 25% MoM'
     ],
     skills: ['JavaScript', 'React', 'Email Integration', 'Google Analytics', 'SEO']
   }

@@ -17,7 +17,7 @@ export default function ResumePage() {
         </Link>
         
         <a 
-          href="/Justin_Gu_Resume.pdf" 
+          href="/Jung Gu Resume.pdf" 
           download
           className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-md transition-colors duration-200"
         >
@@ -194,7 +194,7 @@ export default function ResumePage() {
       {/* Mobile download button (sticky at bottom for easy access) */}
       <div className="md:hidden fixed bottom-4 right-4 z-10">
         <a 
-          href="/Justin_Gu_Resume.pdf" 
+          href="/Jung Gu Resume.pdf" 
           download
           className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium p-3 rounded-full shadow-lg transition-colors duration-200"
           aria-label="Download Resume"

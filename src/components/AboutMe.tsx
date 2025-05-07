@@ -10,7 +10,7 @@ const AboutMe: React.FC = () => {
 
   
     const handleDownloadResume = () => {
-      const resumeUrl = '/Jung-Gu-Resume.pdf';
+      const resumeUrl = '/Jung Gu Resume.pdf';
       window.open(resumeUrl, '_blank');
     };
 
