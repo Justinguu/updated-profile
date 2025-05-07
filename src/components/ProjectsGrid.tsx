@@ -6,6 +6,7 @@ import ProjectCard from './ProjectCard';
 import { Loader, GitBranch, User } from 'lucide-react';
 import type { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods';
 import { skills } from '@/data/skills';
+import { githubConfig, SortBy, SortOrder } from '@/config/github';
 
 type GitHubRepo = RestEndpointMethodTypes["repos"]["listForUser"]["response"]["data"][0];
 type GitHubCommit = RestEndpointMethodTypes["repos"]["listCommits"]["response"]["data"][0];
@@ -36,8 +37,8 @@ const ProjectsGrid: React.FC = () => {
   const [filter, setFilter] = useState<string>('All');
   const [technologies, setTechnologies] = useState<string[]>(['All']);
   const [activeTab, setActiveTab] = useState<'own' | 'contributed'>('own');
-  const [sortBy, setSortBy] = useState<'stars' | 'updated' | 'forks' | 'name'>('updated');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [sortBy, setSortBy] = useState<SortBy>(githubConfig.defaultSortBy);
+  const [sortOrder, setSortOrder] = useState<SortOrder>(githubConfig.defaultSortOrder);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Function to map GitHub topics to our icon format
@@ -87,15 +88,42 @@ const ProjectsGrid: React.FC = () => {
   const fetchProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const username = 'justinguu';
+      const username = githubConfig.username;
 
       const { data: allRepos } = await githubService.getRepositories(username, {
         per_page: 100,
         sort: 'updated',
         type: 'all',
       });
+      
+      // Filter repositories based on configuration
+      let filteredRepos = allRepos;
+      
+      // Filter out hidden repositories
+      if (githubConfig.hiddenRepositories.length > 0) {
+        filteredRepos = filteredRepos.filter(repo => 
+          !githubConfig.hiddenRepositories.includes(repo.name)
+        );
+      }
+      
+      // Only show featured repositories if specified
+      if (githubConfig.featuredRepositories.length > 0) {
+        filteredRepos = filteredRepos.filter(repo => 
+          githubConfig.featuredRepositories.includes(repo.name)
+        );
+      }
+      
+      // Filter forked repositories if configured
+      if (!githubConfig.showForkedRepositories) {
+        filteredRepos = filteredRepos.filter(repo => !repo.fork);
+      }
+      
+      // Limit the number of repositories if configured
+      if (githubConfig.maxRepositories > 0) {
+        filteredRepos = filteredRepos.slice(0, githubConfig.maxRepositories);
+      }
 
-      const allProjects: Project[] = await Promise.all(allRepos.map(async (repo: GitHubRepo) => {
+      const allProjects: Project[] = await Promise.all(filteredRepos.map(async (repo: GitHubRepo) => {
         const { data: commits } = await githubService.getRepositoryCommits(
           repo.owner?.login ?? username,
           repo.name,
@@ -195,13 +223,31 @@ const ProjectsGrid: React.FC = () => {
   const resetAllFilters = () => {
     setFilter('All');
     setActiveTab('own');
-    setSortBy('updated');
-    setSortOrder('desc');
+    setSortBy(githubConfig.defaultSortBy);
+    setSortOrder(githubConfig.defaultSortOrder);
     setSearchQuery('');
+  };
+
+  // Add a notice about filtered repositories if applicable
+  const getFilterNotice = () => {
+    if (githubConfig.featuredRepositories.length > 0) {
+      return `Showing selected repositories from ${githubConfig.username}'s GitHub`;
+    }
+    if (githubConfig.hiddenRepositories.length > 0) {
+      return `Some repositories are hidden based on configuration`;
+    }
+    return '';
   };
 
   return (
     <div className="space-y-4">
+      {/* Config Notice */}
+      {getFilterNotice() && (
+        <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+          {getFilterNotice()}
+        </div>
+      )}
+      
       {/* Search Bar */}
       <div className="w-full">
         <input
@@ -218,7 +264,7 @@ const ProjectsGrid: React.FC = () => {
         <div className="flex items-center gap-2">
           <select
             value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as 'stars' | 'updated' | 'forks' | 'name')}
+            onChange={(e) => setSortBy(e.target.value as SortBy)}
             className="px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 dark:focus:ring-primary/20 focus:border-primary dark:focus:border-primary transition-colors"
             style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
           >

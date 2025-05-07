@@ -6,6 +6,7 @@ import { GithubIcon, ExternalLink, Loader, Calendar, Code, Folder, Image as Imag
 import Image from 'next/image';
 import * as Si from 'react-icons/si';
 import type { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods';
+import { githubConfig } from '@/config/github';
 
 type GitHubRepo = RestEndpointMethodTypes["repos"]["listForUser"]["response"]["data"][0];
 
@@ -128,21 +129,46 @@ const FeaturedProjects: React.FC = () => {
   const fetchProjects = useCallback(async () => {
     setLoading(true);
     try {
-      const username = 'justinguu';
+      const username = githubConfig.username;
       const { data: repos } = await githubService.getRepositories(username, {
         per_page: 100,
         type: 'owner'
       });
 
+      // Filter repositories based on configuration
+      let filteredRepos = repos;
+      
+      // Filter out hidden repositories
+      if (githubConfig.hiddenRepositories.length > 0) {
+        filteredRepos = filteredRepos.filter(repo => 
+          !githubConfig.hiddenRepositories.includes(repo.name)
+        );
+      }
+      
+      // Only show featured repositories for featured section
+      // If featured list is empty, display the most recently updated ones
+      let featureRepos = filteredRepos;
+      if (githubConfig.featuredRepositories.length > 0) {
+        featureRepos = filteredRepos.filter(repo => 
+          githubConfig.featuredRepositories.includes(repo.name)
+        );
+        
+        // If no specified featured repos are found, fall back to recent ones
+        if (featureRepos.length === 0) {
+          featureRepos = filteredRepos;
+        }
+      }
+      
       // Sort by update date (most recent first)
-      const sortedRepos = repos.sort((a, b) => {
+      const sortedRepos = featureRepos.sort((a, b) => {
         const dateA = new Date(a.updated_at || 0).getTime();
         const dateB = new Date(b.updated_at || 0).getTime();
         return dateB - dateA;
       });
 
-      // Convert to our simplified format
-      const projectData = sortedRepos.slice(0, 4).map(repo => {
+      // Take the first 4 (or fewer) repositories for featured display
+      const displayLimit = Math.min(4, sortedRepos.length);
+      const projectData = sortedRepos.slice(0, displayLimit).map(repo => {
         // Generate a better description if none is available
         let description = repo.description;
         if (!description || description === 'No description available') {
