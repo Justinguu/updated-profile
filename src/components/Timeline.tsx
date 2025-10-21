@@ -25,7 +25,7 @@ const educationItems: TimelineItem[] = [
     title: 'Business Administration',
     organization: 'Georgia State University',
     date: 'Aug 2014 - Jul 2017',
-    description: ['No Degree, Completed class work in business administration and management, due to personal reasons.'],
+    description: ['No Degree, Completed class work in business administration and management.'],
     skills: ['SEO', 'SCRUM', 'PowerBI', 'SQL', 'Project Management']
 
   },

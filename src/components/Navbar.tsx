@@ -10,7 +10,7 @@ import { Home, BookOpen, Box, Code, FileText } from "lucide-react";
 const navLinks = [
   { name: "Home", href: "/", icon: Home },
   { name: "Blog", href: "/blog", icon: BookOpen },
-  { name: "Stack Architect", href: "/tech-stack-architect", icon: Box },
+  // { name: "Stack Architect", href: "/tech-stack-architect", icon: Box },
   { name: "Resume", href: "/resume", icon: FileText },
 ];
 
