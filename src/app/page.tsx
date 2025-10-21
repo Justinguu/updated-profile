@@ -1,11 +1,12 @@
 import React from 'react';
 import AboutMe from '@/components/AboutMe';
 import Technologies from '@/components/Technologies';
-import FeaturedProjects from '@/components/FeaturedProjects';
+// import FeaturedProjects from '@/components/FeaturedProjects';
 import LatestPosts from '@/components/LatestPosts';
 import SkillsOverview from '@/components/SkillsOverview';
 import Timeline from '@/components/Timeline';
 import Languages from '@/components/Languages';
+import Hobbies from '@/components/Hobbies';
 import ContactMe from '@/components/ContactMe';
 
 const HomePage: React.FC = () => {
@@ -23,9 +24,14 @@ const HomePage: React.FC = () => {
 
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-        {/* Featured Projects - Spans 2 columns */}
-        <div className="lg:col-span-2">
+        {/* Featured Projects - Spans 2 columns - COMMENTED OUT */}
+        {/* <div className="lg:col-span-2">
           <FeaturedProjects />
+        </div> */}
+
+        {/* Timeline - Moved to where Featured Projects was */}
+        <div className="lg:col-span-2">
+          <Timeline />
         </div>
 
         {/* Skills Overview */}
@@ -33,19 +39,19 @@ const HomePage: React.FC = () => {
           <SkillsOverview />
         </div>
 
-        {/* Timeline - Spans full width */}
-        <div className="lg:col-span-3">
-          <Timeline />
-        </div>
-
-        {/* Latest Posts */}
-        <div className="lg:col-span-2">
+        {/* Latest Posts - Reduced to 1 column */}
+        <div className="lg:col-span-1">
           <LatestPosts />
         </div>
 
         {/* Languages */}
         <div>
           <Languages />
+        </div>
+
+        {/* Hobbies & Interests */}
+        <div>
+          <Hobbies />
         </div>
 
         {/* Contact Info - Spans full width */}

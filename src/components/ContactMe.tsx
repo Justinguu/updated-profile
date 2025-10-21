@@ -15,16 +15,16 @@ const ContactMe: React.FC = () => {
   const contactInfo: ContactInfo[] = [
     {
       type: 'Email',
-      value: 'jung.gu@example.com',
+      value: 'justinguuu@gmail.com',
       icon: <Mail className="w-5 h-5" />,
-      link: 'mailto:jung.gu@example.com',
+      link: 'mailto:justinguuu@gmail.com',
       label: 'Send an email'
     },
     {
       type: 'Phone',
-      value: '(555) 123-4567',
+      value: '(678) 923-2057',
       icon: <Phone className="w-5 h-5" />,
-      link: 'tel:5551234567',
+      link: 'tel:6789232057',
       label: 'Call me'
     },
     {

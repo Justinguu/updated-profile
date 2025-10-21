@@ -6,10 +6,13 @@ interface Hobby {
 }
 
 const hobbies: Hobby[] = [
-  { name: 'Guitar', icon: '🎸' },
+  { name: 'Running', icon: '🏃' },
+  { name: 'Weightlifting', icon: '🏋️' },
+  { name: 'Reading', icon: '📚' },
   { name: 'Hiking', icon: '🥾' },
-  { name: 'Climbing', icon: '🧗' },
-  { name: 'Travel', icon: '✈️' },
+  { name: 'Snowboarding', icon: '🏂' },
+  { name: 'Wakeboarding', icon: '🏄' },
+  { name: 'Fishing', icon: '🎣' },
 ];
 
 interface HobbyCardProps {
@@ -18,11 +21,11 @@ interface HobbyCardProps {
 }
 
 const HobbyCard: React.FC<HobbyCardProps> = ({ hobby }) => (
-  <div className="flex flex-col items-center justify-center p-3 transition-all hover:bg-gray-100 dark:hover:bg-[#252B3B] rounded-lg">
-    <div className="text-3xl mb-2 transform group-hover:scale-110 transition-all duration-300">
+  <div className="flex items-center gap-3 p-3 bg-white dark:bg-[#1E2330] rounded-lg border border-gray-100 dark:border-gray-800 hover:shadow-sm transition-all">
+    <div className="text-2xl">
       {hobby.icon}
     </div>
-    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
+    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
       {hobby.name}
     </span>
   </div>
@@ -30,11 +33,11 @@ const HobbyCard: React.FC<HobbyCardProps> = ({ hobby }) => (
 
 const Hobbies: React.FC = () => {
   return (
-    <div className="bg-[#F8FAFC] dark:bg-[#151B28] rounded-lg p-4 shadow-md">
-      <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4 px-2">
-        Hobbies
+    <div className="bg-[#F8FAFC] dark:bg-[#151B28] rounded-lg p-4 transition-colors">
+      <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 mb-3">
+        Hobbies & Interests
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-1">
+      <div className="space-y-2">
         {hobbies.map((hobby, index) => (
           <HobbyCard key={hobby.name} hobby={hobby} index={index} />
         ))}
