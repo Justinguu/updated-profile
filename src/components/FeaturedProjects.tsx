@@ -257,7 +257,6 @@ const FeaturedProjects: React.FC = () => {
       setProjects(projectData);
     } catch (err) {
       setError('Error fetching featured projects');
-      console.error('Error fetching featured projects:', err);
     } finally {
       setLoading(false);
     }

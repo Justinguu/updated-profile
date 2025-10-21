@@ -22,7 +22,7 @@ async function generateEmbeddings() {
     // Load resume data
     console.log("Loading resume data...");
     const loader = new JSONLoader(
-      "src/data/resumeDtata.json",
+      "src/data/resumeData.json",
       ["/personalInfo", "/experience", "/education", "/skills", "/projects", "/interests", "/languages"]
     );
 

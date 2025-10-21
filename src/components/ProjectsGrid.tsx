@@ -165,7 +165,6 @@ const ProjectsGrid: React.FC = () => {
       setTechnologies(['All', ...allTechs]);
     } catch (err) {
       setError('Error fetching projects. Please try refreshing the page.');
-      console.error('Error fetching projects:', err);
     } finally {
       setLoading(false);
     }

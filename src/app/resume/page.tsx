@@ -3,7 +3,7 @@
 import React from 'react';
 import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Globe, Download } from 'lucide-react';
 import Link from 'next/link';
-import resumeData from '@/data/resumeDtata.json';
+import resumeData from '@/data/resumeData.json';
 
 export default function ResumePage() {
   const { personalInfo, experience, education, skills, projects, languages, interests } = resumeData;

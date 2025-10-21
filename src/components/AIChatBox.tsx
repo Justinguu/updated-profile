@@ -24,15 +24,10 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
     api: '/api/chat',
     onResponse: (response) => {
       if (!response.ok) {
-        console.error('Response error:', response.statusText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     },
-    onFinish: (message) => {
-      console.log('Chat finished successfully');
-    },
     onError: (error) => {
-      console.error("Chat error:", error);
       const errorMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',
@@ -49,7 +44,6 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
     try {
       await originalHandleSubmit(e);
     } catch (err: any) {
-      console.error("Failed to send message:", err);
       const errorMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',

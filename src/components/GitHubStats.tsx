@@ -68,7 +68,6 @@ const GitHubStats: React.FC = () => {
         setLanguages(languageData);
       } catch (err) {
         setError('Failed to fetch GitHub data');
-        console.error('Error fetching GitHub data:', err);
       } finally {
         setLoading(false);
       }

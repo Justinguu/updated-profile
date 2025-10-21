@@ -41,10 +41,10 @@ const AboutMe: React.FC = () => {
               <div className="flex-1 bg-gray-50 dark:bg-[#1E2330] rounded-lg p-4 mb-8 mt-4">
                 <div className="space-y-3">
                   <p className="text-md text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Hey there, I&apos;m Jung (Justin), a Software Developer based in Duluth, Georgia, with a passion for desigining, building and managing software solutions. My experience spans from start ups to mid-sized companies, equipping me with a diverse skill set and the ability to adapt seemlessly to different challenges.With an eye for detail and a hunger for learning, I&apos;m all about delivering high-quality solutions that meet both user needs and business objectives.
+                  Hey there, I&apos;m Jung (Justin), a Software Developer based in Duluth, Georgia, with a passion for designing, building and managing software solutions. My experience spans from start ups to mid-sized companies, equipping me with a diverse skill set and the ability to adapt seamlessly to different challenges. With an eye for detail and a hunger for learning, I&apos;m all about delivering high-quality solutions that meet both user needs and business objectives.
                   </p>
                   <p className="text-md text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Automizing business processes and building scalable software solutions to improve efficiency and cost-effectiveness is where I thrive.
+                    Automating business processes and building scalable software solutions to improve efficiency and cost-effectiveness is where I thrive.
                   </p>
                 </div>
               </div>
