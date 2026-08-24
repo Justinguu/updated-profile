@@ -1,0 +1,171 @@
+{
+  "personalInfo": {
+    "name": "Jung Gu",
+    "title": "Software Engineer | Cloud & Automation",
+    "email": "justinguuu@gmail.com",
+    "phone": "678-923-2057",
+    "location": "Duluth, Georgia",
+    "github": "https://github.com/Justinguu",
+    "linkedin": "www.linkedin.com/in/jung-gu",
+    "website": "jgu-portfolio.vercel.app",
+    "summary": "Software engineer building C# and Python services on Azure, with a focus on automation, PostgreSQL data layers, and containerized deployments. Led a VM-to-container migration that made deployments 5x faster and cut infrastructure cost 80%, and keep medical device tracking at 99.9% uptime across 100k+ monthly transactions."
+  },
+  "experience": [
+    {
+      "company": "Global Med Logistics",
+      "position": "Software Engineer",
+      "startDate": "Feb 2024",
+      "endDate": "Present",
+      "description": "• Led the migration from virtual machines to Azure Container Apps Jobs (Docker), building the C# and Python services that run on it; deployments 5x faster, infrastructure cost down 80%.\n• Automated the shipment data pipeline in Python and C# on scheduled Azure container jobs, writing to PostgreSQL and cutting manual processing by 40%.\n• Engineered a high-availability API gateway on Azure API Management, backed by C# services, for real-time tracking across third-party partners.\n• Own the PostgreSQL data layer behind medical device tracking for Stryker: 99.9% uptime and 100% data accuracy across 100k+ monthly transactions."
+    },
+    {
+      "company": "Engaj Media",
+      "position": "Website Developer Intern",
+      "startDate": "May 2023",
+      "endDate": "Dec 2023",
+      "description": "• Worked within an Agile (Scrum) team to deliver a high-performance TypeScript/React landing page, implementing lazy loading and component optimization to Increase consultation requests by 35%.\n• Optimized website performance through code refactoring and modern development practices, ensuring cross-browser compatibility and mobile responsiveness."
+    },
+    {
+      "company": "YongMen Law P.C",
+      "position": "Freelance Software Engineer",
+      "startDate": "Dec 2022",
+      "endDate": "Mar 2023",
+      "description": "• Developed client communication system integrating Mailchimp API for automated email workflows, reducing manual follow-ups by 30%.\n• Optimized website performance by diagnosing issues via Google Analytics (e.g., bounce rates, exit pages) and implementing UI/SEO fixes that grew traffic 25% MoM."
+    }
+  ],
+  "education": [
+    {
+      "institution": "App Academy",
+      "degree": "Full-Stack Software Engineering",
+      "startDate": "Feb 2022",
+      "endDate": "Nov 2022",
+      "description": "Immersive full-stack program: algorithms, web development, and team projects run on Agile."
+    },
+    {
+      "institution": "Georgia State University",
+      "degree": "Business Administration",
+      "startDate": "Aug 2014",
+      "endDate": "Jul 2017",
+      "description": "Coursework in business administration and management."
+    }
+  ],
+  "skills": [
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "C#",
+    "Azure",
+    "PostgreSQL",
+    "Automation",
+    "Pandas",
+    "React",
+    "Redux",
+    "Node.JS",
+    "Fast API",
+    "SQL",
+    "Flask",
+    "MongoDB",
+    "Git",
+    "TTD",
+    "Containers",
+    "Serverless",
+    "VM",
+    "Deployment",
+    "Docker",
+    "Object Oriented Programming",
+    "HTML",
+    "CSS"
+  ],
+  "projects": [
+    {
+      "name": "Klickr Project",
+      "description": "• Utilized Flask blueprints and SQLAlchemy to develop a Restful backend server with responsive API's and data pertaining to images, reviews, and tags for frontend client-side requests.\n• Collaborated with a team of developers to produce a fully functional application by managing an efficient Git workflow of push/pull requests while implementing SCRUM principles.",
+      "technologies": [
+        "Javascript",
+        "Python",
+        "ReactJS",
+        "Redux",
+        "Flask",
+        "SQLAlchemy",
+        "PSQL"
+      ],
+      "link": "https://github.com/Justinguu/klickr"
+    },
+    {
+      "name": "Jusbnb Project",
+      "description": "• Designed and implemented efficient database relationships and Restful APIs using Sequelize, Node.js, Express, and integrated SQLite for optimized data storage and management.\n• Implemented a booking component enabling seamless date reservation without conflicts, incorporating error validation functions and JavaScript event listeners for accurate selection.",
+      "technologies": [
+        "Javascript",
+        "Python",
+        "ReactJS",
+        "Redux",
+        "Flask",
+        "SQLAlchemy",
+        "PSQL"
+      ],
+      "link": "https://github.com/Justinguu/API-project"
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "proficiency": "Native"
+    },
+    {
+      "language": "Korean",
+      "proficiency": "Fluent"
+    }
+  ],
+  "interests": [
+    "Software Development",
+    "Cloud Computing",
+    "System Design",
+    "Automation",
+    "Web Development"
+  ],
+  "skillGroups": [
+    {
+      "name": "Languages",
+      "items": [
+        "C#",
+        "Python",
+        "TypeScript",
+        "JavaScript",
+        "SQL"
+      ]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "items": [
+        "Azure (Container Apps, API Management)",
+        "Docker",
+        "CI/CD",
+        "GitHub Actions",
+        "Automation"
+      ]
+    },
+    {
+      "name": "Data",
+      "items": [
+        "PostgreSQL",
+        "MongoDB",
+        "Pandas",
+        "Data pipelines"
+      ]
+    },
+    {
+      "name": "Frameworks & tools",
+      "items": [
+        ".NET",
+        "Flask",
+        "FastAPI",
+        "Node.js",
+        "React",
+        "Git",
+        "Pytest",
+        "Jira",
+        "Power BI"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Token system
+  ─────────────
+  Ground:   cool slate, not cream — the colour of a container yard at dawn.
+  Surface:  white / ink cards with a hairline border.
+  Accent:   cargo orange. One accent, used sparingly.
+  Type:     Archivo (display, wide) · IBM Plex Sans (body) · IBM Plex Mono (data).
+*/
+@layer base {
+  :root {
+    --background: 216 22% 95%;        /* #EEF1F5 */
+    --foreground: 222 40% 9%;         /* #0E1524 */
+    --card: 0 0% 100%;
+    --card-foreground: 222 40% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 40% 9%;
+    --primary: 22 82% 51%;            /* #E8641B cargo orange */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 20% 91%;
+    --secondary-foreground: 222 40% 9%;
+    --muted: 214 20% 91%;
+    --muted-foreground: 213 17% 43%;  /* #5B6B7F steel */
+    --accent: 22 82% 51%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 18% 86%;
+    --input: 214 18% 86%;
+    --ring: 22 82% 51%;
+    --radius: 0.75rem;
+    --track: 214 18% 82%;             /* timeline rail */
+  }
+
+  .dark {
+    --background: 222 48% 8%;         /* #0B1220 */
+    --foreground: 214 30% 93%;
+    --card: 220 36% 12%;              /* #131B29 */
+    --card-foreground: 214 30% 93%;
+    --popover: 220 36% 12%;
+    --popover-foreground: 214 30% 93%;
+    --primary: 22 88% 56%;            /* slightly brighter on ink */
+    --primary-foreground: 222 48% 8%;
+    --secondary: 219 30% 17%;
+    --secondary-foreground: 214 30% 93%;
+    --muted: 219 30% 17%;
+    --muted-foreground: 214 16% 62%;
+    --accent: 22 88% 56%;
+    --accent-foreground: 222 48% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 219 26% 20%;
+    --input: 219 26% 20%;
+    --ring: 22 88% 56%;
+    --track: 219 26% 24%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Card: the single surface used everywhere on the home page */
+  .panel {
+    @apply bg-card text-card-foreground rounded-xl border border-border;
+    box-shadow: 0 1px 0 hsl(var(--foreground) / 0.03);
+  }
+
+  /* Mono eyebrow label — the "field name" on a waybill */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  /* Wide display face */
+  .display {
+    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+    font-variation-settings: "wdth" 118;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-[hsl(22_82%_45%)] dark:hover:bg-[hsl(22_88%_62%)];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px] text-muted-foreground;
+  }
+}
+
+/* Page-load reveal. Respects reduced motion. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.25s; }
+.rise-4 { animation-delay: 0.35s; }
+
+/* Tracking pulse on the "in transit" scan event */
+@keyframes ping-soft {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.scan-live::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  animation: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  .scan-live::after { animation: none; display: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Legacy */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-down { animation: fadeInDown 0.5s ease-out; }
+
+.print-light-mode { background-color: white !important; color: black !important; }
+.print-light-mode * { color: black !important; background-color: transparent !important; }

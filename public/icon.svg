@@ -1,0 +1,6 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- JG monogram: ink tile, cargo-orange dot. Matches the navbar mark. -->
+  <rect width="64" height="64" rx="14" fill="#0E1524"/>
+  <text x="30" y="44" text-anchor="middle" font-family="Archivo, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="800" letter-spacing="-1" fill="#FFFFFF">JG</text>
+  <circle cx="53" cy="45" r="4.5" fill="#E8641B"/>
+</svg>
