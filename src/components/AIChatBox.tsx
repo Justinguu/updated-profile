@@ -86,7 +86,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
             <p className="eyebrow">Assistant</p>
             <h2 className="text-sm font-semibold text-foreground">Ask about Justin</h2>
           </div>
-          <button onClick={onClose} aria-label="Close chat" className="text-muted-foreground hover:text-foreground transition-colors">
+          <button type="button" onClick={onClose} aria-label="Close chat" className="-m-2 inline-flex h-10 w-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground">
             <XCircle size={20} />
           </button>
         </div>

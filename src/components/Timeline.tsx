@@ -119,7 +119,7 @@ const ScanRow: React.FC<{ event: ScanEvent }> = ({ event }) => {
         )}
 
         {event.tags.length > 0 && (
-          <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Tools">
+          <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`Tools at ${event.organization}`}>
             {event.tags.map((tag) => (
               <li key={tag} className="chip">{tag}</li>
             ))}
