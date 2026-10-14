@@ -34,7 +34,7 @@ const SkillsOverview: React.FC = () => (
     </dl>
 
     <Link href="/resume#skills" className="mt-5 inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground">
-      Full matrix on the résumé
+      Full matrix on the resume
       <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
     </Link>
   </section>

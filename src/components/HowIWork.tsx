@@ -8,11 +8,11 @@ import React from 'react';
 const habits = [
   {
     title: 'Features, end to end',
-    body: 'I take a feature from the schema and migration through the UI, the pipeline, and the rollout, and I keep running it after it ships.',
+    body: 'I take a feature from the schema and migration through the UI, the pipeline, and the rollout, and I keep it running after it ships.',
   },
   {
     title: 'Built with the people who use it',
-    body: 'Day to day I work with IT, customer support, and operations and division managers, so what ships matches how the work is actually done.',
+    body: 'Day to day I work with IT, customer support, operations managers, and division managers, so what ships matches how the work is actually done.',
   },
   {
     title: 'Tested before it ships',
@@ -20,7 +20,7 @@ const habits = [
   },
   {
     title: 'Written down for the next person',
-    body: 'Cutovers come with a runbook and scheduled jobs with a control panel, so the team can run what I build without me in the loop.',
+    body: 'Cutovers come with a runbook, and scheduled jobs come with a control panel, so the team can run what I build without me in the loop.',
   },
 ];
 
