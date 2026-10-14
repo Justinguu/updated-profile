@@ -12,11 +12,9 @@ import resumeData from '@/data/resumeData.json';
  * the actions rise in, so the first frame is never empty.
  */
 const { personalInfo } = resumeData;
-const current = resumeData.experience.find((j) => j.endDate === 'Present');
 
 const fields: [string, string][] = [
   ['Origin', personalInfo.location],
-  ['Status', current ? `In transit · ${current.company}` : 'Available'],
   ['Service', 'Full-stack · C# / .NET and Python'],
 ];
 
@@ -42,7 +40,7 @@ const AboutMe: React.FC = () => {
             {fields.map(([k, v]) => (
               <div key={k} className="flex gap-2">
                 <dt>{k}</dt>
-                <dd className={k === 'Status' ? 'text-primary' : 'text-foreground/80'}>{v}</dd>
+                <dd className="text-foreground/80">{v}</dd>
               </div>
             ))}
           </dl>
@@ -61,7 +59,7 @@ const AboutMe: React.FC = () => {
             What I enjoy most is the whole life of a feature: sitting in on the
             first planning conversation, getting to know the people who will
             use it, and staying close to them through launch and after. The
-            best part is shipping something that takes real work off someone's
+            best part is shipping something that takes real work off someone&apos;s
             plate and makes their day easier.
           </p>
 

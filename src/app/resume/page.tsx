@@ -108,7 +108,7 @@ export default function ResumePage() {
                       {job.position} <span className="font-normal text-muted-foreground">· {job.company}</span>
                     </h3>
                     <span className={`whitespace-nowrap font-mono text-xs ${job.endDate === 'Present' ? 'text-primary' : 'text-muted-foreground'}`}>
-                      {job.endDate === 'Present' ? `In transit · since ${job.startDate}` : `${job.startDate} – ${job.endDate}`}
+                      {job.startDate} – {job.endDate}
                     </span>
                   </div>
                   <ul className="mt-2 space-y-1.5 text-sm leading-relaxed text-foreground/85">

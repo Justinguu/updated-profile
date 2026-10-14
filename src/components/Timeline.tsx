@@ -72,8 +72,8 @@ const ScanRow: React.FC<{ event: ScanEvent }> = ({ event }) => {
     <li className="relative grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 sm:grid-cols-[7.5rem_auto_minmax(0,1fr)] sm:gap-x-5">
       {/* Timestamp column (desktop) */}
       <div className="hidden pt-0.5 font-mono text-xs leading-5 text-muted-foreground sm:block">
-        <div className={cn(live && 'text-primary')}>{live ? 'In transit' : event.start}</div>
-        <div className="opacity-70">{live ? `since ${event.start}` : `to ${event.end}`}</div>
+        <div className={cn(live && 'text-primary')}>{event.start}</div>
+        <div className="opacity-70">to {event.end}</div>
       </div>
 
       {/* Rail + dot */}
@@ -94,7 +94,7 @@ const ScanRow: React.FC<{ event: ScanEvent }> = ({ event }) => {
           <span className="text-sm text-muted-foreground">{event.organization}</span>
         </div>
         <div className={cn('mt-0.5 font-mono text-xs sm:hidden', live ? 'text-primary' : 'text-muted-foreground')}>
-          {live ? `In transit · since ${event.start}` : `${event.start} to ${event.end}`}
+          {event.start} to {event.end}
         </div>
 
         {event.notes.length > 0 && (
