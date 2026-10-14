@@ -8,11 +8,11 @@ import React from 'react';
 const habits = [
   {
     title: 'Features, end to end',
-    body: 'I take a feature from the schema and migration through the UI, the pipeline, and the rollout, and I keep it running after it ships.',
+    body: 'I take a feature from the schema and migration through the UI, the pipeline, and the rollout. After it ships I keep coming back to it, updating it as the work changes so it stays useful.',
   },
   {
     title: 'Built with the people who use it',
-    body: 'Day to day I work with IT, customer support, operations managers, and division managers, so what ships matches how the work is actually done.',
+    body: 'I start at planning with the people who will use it. IT, customer support, operations managers, and division managers stay in the loop as it takes shape, and we refine it together until it fits how the work is actually done.',
   },
   {
     title: 'Tested before it ships',
