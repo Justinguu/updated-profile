@@ -1,36 +1,39 @@
 {
   "personalInfo": {
     "name": "Jung Gu",
-    "title": "Software Engineer | Cloud & Automation",
+    "title": "Full-Stack Software Engineer | C# / .NET and Python",
     "email": "justinguuu@gmail.com",
-    "phone": "678-923-2057",
+    "phone": "(678) 923-2057",
     "location": "Duluth, Georgia",
     "github": "https://github.com/Justinguu",
-    "linkedin": "www.linkedin.com/in/jung-gu",
+    "linkedin": "linkedin.com/in/jung-gu",
     "website": "jgu-portfolio.vercel.app",
-    "summary": "Software engineer building C# and Python services on Azure, with a focus on automation, PostgreSQL data layers, and containerized deployments. Led a VM-to-container migration that made deployments 5x faster and cut infrastructure cost 80%, and keep medical device tracking at 99.9% uptime across 100k+ monthly transactions."
+    "summary": "C# and Python software engineer with 3+ years of experience. Builds the operations platform at a medical-device logistics company alongside the CTO, owning features end to end and working daily with IT, customer support, operations managers, and division managers. Full stack: .NET and Blazor, Python, PostgreSQL, Azure, and AI/LLM features."
   },
   "experience": [
     {
-      "company": "Global Med Logistics",
+      "company": "GlobalMed Logistix",
       "position": "Software Engineer",
       "startDate": "Feb 2024",
       "endDate": "Present",
-      "description": "• Led the migration from virtual machines to Azure Container Apps Jobs (Docker), building the C# and Python services that run on it; deployments 5x faster, infrastructure cost down 80%.\n• Automated the shipment data pipeline in Python and C# on scheduled Azure container jobs, writing to PostgreSQL and cutting manual processing by 40%.\n• Engineered a high-availability API gateway on Azure API Management, backed by C# services, for real-time tracking across third-party partners.\n• Own the PostgreSQL data layer behind medical device tracking for Stryker: 99.9% uptime and 100% data accuracy across 100k+ monthly transactions."
+      "description": "• Co-develop the company's operations platform with the CTO, owning features end to end: a C# / .NET 10 Blazor web app on PostgreSQL that replaced a legacy Python (Django) system for inventory, 3PL logistics, and KPIs.\n• Built multiple LLM-powered analytics tools (Anthropic Claude API, agentic tool use) that generate KPI dashboards from plain-English requests, answer staff questions from company data, and speed up onboarding.\n• Migrated scheduled workloads from always-on virtual machines to Docker containers on Azure Container Apps Jobs, cutting hosting costs 80% and replacing manual server updates with automated, repeatable deployments.\n• Automated shipment data processing with scheduled Python jobs on Azure, reducing manual work by 40%; later ported seven of these jobs to .NET with an in-app control panel for health and run history.\n• Replaced manual spreadsheet workflows with validated data import pipelines for inventory, orders, KPIs, and financials, and built PDF shipping labels and camera-based barcode scanning for the warehouse floor.\n• Designed role-based access so each user sees only the pages and data they are allowed to, with 3PL customer data isolation enforced in SQL, and added Microsoft single sign-on (Entra ID).\n• Integrated Microsoft 365 (Graph API), Twilio SMS, Paylocity (HR), and two warehouse/3PL APIs with caching and fallbacks for slow partners, plus an Azure API Management + Functions gateway for real-time partner tracking.\n• Set up continuous deployment with zero downtime: nine GitHub Actions pipelines release to Azure App Service via staging slot swaps, with Data Protection keys shared in Blob Storage so users stay signed in through a swap.\n• Ran 176 production database migrations, each tested on a staging copy first, and wrote the cutover runbook that retired the legacy system; the codebase is backed by 1,844 automated xUnit tests.",
+      "tags": ["C# / .NET 10", "Blazor", "Python", "PostgreSQL", "Azure", "Docker", "GitHub Actions", "Claude API"]
     },
     {
       "company": "Engaj Media",
       "position": "Website Developer Intern",
       "startDate": "May 2023",
       "endDate": "Dec 2023",
-      "description": "• Worked within an Agile (Scrum) team to deliver a high-performance TypeScript/React landing page, implementing lazy loading and component optimization to Increase consultation requests by 35%.\n• Optimized website performance through code refactoring and modern development practices, ensuring cross-browser compatibility and mobile responsiveness."
+      "description": "• Delivered a high-performance React landing page in an Agile (Scrum) team, using lazy loading and component optimization to increase consultation requests by 35%.",
+      "tags": ["React", "JavaScript", "Scrum", "Performance"]
     },
     {
-      "company": "YongMen Law P.C",
+      "company": "YongMen Law P.C.",
       "position": "Freelance Software Engineer",
       "startDate": "Dec 2022",
       "endDate": "Mar 2023",
-      "description": "• Developed client communication system integrating Mailchimp API for automated email workflows, reducing manual follow-ups by 30%.\n• Optimized website performance by diagnosing issues via Google Analytics (e.g., bounce rates, exit pages) and implementing UI/SEO fixes that grew traffic 25% MoM."
+      "description": "• Automated client follow-up emails through the Mailchimp API, cutting manual follow-ups 30%, and shipped UI/SEO fixes guided by Google Analytics that grew traffic 25% month over month.",
+      "tags": ["JavaScript", "Mailchimp API", "Google Analytics", "SEO"]
     }
   ],
   "education": [
@@ -39,133 +42,68 @@
       "degree": "Full-Stack Software Engineering",
       "startDate": "Feb 2022",
       "endDate": "Nov 2022",
-      "description": "Immersive full-stack program: algorithms, web development, and team projects run on Agile."
+      "description": "Immersive full-stack program: algorithms, web development, and team projects run on Agile.",
+      "tags": ["JavaScript", "Python", "React", "SQL"]
     },
     {
       "institution": "Georgia State University",
-      "degree": "Business Administration",
+      "degree": "Business Administration coursework",
       "startDate": "Aug 2014",
       "endDate": "Jul 2017",
-      "description": "Coursework in business administration and management."
+      "description": "",
+      "tags": ["Business administration", "Management"]
+    }
+  ],
+  "skillGroups": [
+    {
+      "name": "C# / .NET",
+      "items": [".NET 10", "ASP.NET Core", "Blazor Server (MudBlazor, Radzen)", "Npgsql", "xUnit", "OpenXML", "PDFsharp"]
+    },
+    {
+      "name": "Python",
+      "items": ["Flask", "FastAPI", "Django", "Pandas", "Pytest", "Automation and ETL scripts"]
+    },
+    {
+      "name": "Web & Data",
+      "items": ["JavaScript", "React", "Node.js", "HTML/CSS", "REST APIs", "PostgreSQL", "SQL", "Power BI"]
+    },
+    {
+      "name": "Azure",
+      "items": ["App Service", "Container Apps Jobs", "Container Registry", "Functions", "API Management", "Blob Storage", "Entra ID"]
+    },
+    {
+      "name": "DevOps",
+      "items": ["Docker", "Git", "GitHub Actions CI/CD with OIDC", "Deployment slots", "Database migrations"]
+    },
+    {
+      "name": "AI & Integrations",
+      "items": ["LLM features (Anthropic Claude API, agentic tool use)", "Microsoft Graph", "Twilio SMS", "SFTP"]
     }
   ],
   "skills": [
-    "JavaScript",
-    "TypeScript",
-    "Python",
-    "C#",
-    "Azure",
-    "PostgreSQL",
-    "Automation",
-    "Pandas",
-    "React",
-    "Redux",
-    "Node.JS",
-    "Fast API",
-    "SQL",
-    "Flask",
-    "MongoDB",
-    "Git",
-    "TTD",
-    "Containers",
-    "Serverless",
-    "VM",
-    "Deployment",
-    "Docker",
-    "Object Oriented Programming",
-    "HTML",
-    "CSS"
+    "C#", ".NET 10", "ASP.NET Core", "Blazor", "Python", "Flask", "FastAPI", "Django", "Pandas", "Pytest", "xUnit",
+    "JavaScript", "React", "Node.js", "HTML/CSS", "REST APIs", "PostgreSQL", "SQL", "Power BI",
+    "Azure App Service", "Azure Container Apps Jobs", "Azure Functions", "Azure API Management", "Azure Blob Storage", "Entra ID",
+    "Docker", "Git", "GitHub Actions", "CI/CD", "Database migrations",
+    "Anthropic Claude API", "Microsoft Graph", "Twilio SMS", "SFTP"
   ],
   "projects": [
     {
-      "name": "Klickr Project",
-      "description": "• Utilized Flask blueprints and SQLAlchemy to develop a Restful backend server with responsive API's and data pertaining to images, reviews, and tags for frontend client-side requests.\n• Collaborated with a team of developers to produce a fully functional application by managing an efficient Git workflow of push/pull requests while implementing SCRUM principles.",
-      "technologies": [
-        "Javascript",
-        "Python",
-        "ReactJS",
-        "Redux",
-        "Flask",
-        "SQLAlchemy",
-        "PSQL"
-      ],
+      "name": "Klickr",
+      "description": "• Flask and SQLAlchemy REST backend serving images, reviews, and tags to a React/Redux client.\n• Built with a team on a Git pull-request workflow run on Scrum.",
+      "technologies": ["Python", "Flask", "SQLAlchemy", "PostgreSQL", "React", "Redux"],
       "link": "https://github.com/Justinguu/klickr"
     },
     {
-      "name": "Jusbnb Project",
-      "description": "• Designed and implemented efficient database relationships and Restful APIs using Sequelize, Node.js, Express, and integrated SQLite for optimized data storage and management.\n• Implemented a booking component enabling seamless date reservation without conflicts, incorporating error validation functions and JavaScript event listeners for accurate selection.",
-      "technologies": [
-        "Javascript",
-        "Python",
-        "ReactJS",
-        "Redux",
-        "Flask",
-        "SQLAlchemy",
-        "PSQL"
-      ],
+      "name": "Jusbnb",
+      "description": "• Node.js, Express, and Sequelize REST API with a React front end.\n• Booking component that prevents date conflicts with validation and event handling.",
+      "technologies": ["JavaScript", "Node.js", "Express", "Sequelize", "React", "Redux"],
       "link": "https://github.com/Justinguu/API-project"
     }
   ],
   "languages": [
-    {
-      "language": "English",
-      "proficiency": "Native"
-    },
-    {
-      "language": "Korean",
-      "proficiency": "Fluent"
-    }
+    { "language": "English", "proficiency": "Native" },
+    { "language": "Korean", "proficiency": "Fluent" }
   ],
-  "interests": [
-    "Software Development",
-    "Cloud Computing",
-    "System Design",
-    "Automation",
-    "Web Development"
-  ],
-  "skillGroups": [
-    {
-      "name": "Languages",
-      "items": [
-        "C#",
-        "Python",
-        "TypeScript",
-        "JavaScript",
-        "SQL"
-      ]
-    },
-    {
-      "name": "Cloud & DevOps",
-      "items": [
-        "Azure (Container Apps, API Management)",
-        "Docker",
-        "CI/CD",
-        "GitHub Actions",
-        "Automation"
-      ]
-    },
-    {
-      "name": "Data",
-      "items": [
-        "PostgreSQL",
-        "MongoDB",
-        "Pandas",
-        "Data pipelines"
-      ]
-    },
-    {
-      "name": "Frameworks & tools",
-      "items": [
-        ".NET",
-        "Flask",
-        "FastAPI",
-        "Node.js",
-        "React",
-        "Git",
-        "Pytest",
-        "Jira",
-        "Power BI"
-      ]
-    }
-  ]
+  "interests": ["Cloud infrastructure", "LLM-powered tooling", "System design", "Automation"]
 }

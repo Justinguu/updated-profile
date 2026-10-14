@@ -15,7 +15,7 @@ const contacts: Contact[] = [
   { label: 'Location', value: 'Duluth, Georgia', icon: <MapPin className="h-4 w-4" /> },
   { label: 'LinkedIn', value: 'in/jung-gu', icon: <Linkedin className="h-4 w-4" />, href: 'https://linkedin.com/in/jung-gu', external: true },
   { label: 'GitHub', value: 'Justinguu', icon: <Github className="h-4 w-4" />, href: 'https://github.com/Justinguu', external: true },
-  { label: 'Resume', value: 'PDF', icon: <FileText className="h-4 w-4" />, href: '/Jung Gu Resume.pdf', external: true },
+  { label: 'Resume', value: 'PDF', icon: <FileText className="h-4 w-4" />, href: '/Jung_Gu_Resume.pdf', external: true },
 ];
 
 const ContactMe: React.FC = () => (

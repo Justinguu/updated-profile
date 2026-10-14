@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     default: "Jung Gu · Software Engineer",
   },
   description:
-    "Software engineer in Duluth, Georgia. I build the pipelines that move shipments, data, and deployments — on Azure, in containers, with Python and TypeScript.",
+    "Full-stack software engineer in Duluth, Georgia. I build the operations platform behind a medical-device logistics company in C# / .NET and Python, on PostgreSQL and Azure.",
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
   },

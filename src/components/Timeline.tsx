@@ -3,15 +3,17 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import resumeData from '@/data/resumeData.json';
 
 /**
  * Work history, presented as a shipment tracking record.
  *
- * Justin's day job is shipment and device tracking, so the metaphor is
- * literal: each role is a scan event with a timestamp, the current role is
- * "in transit", and education is the origin scan. Order carries meaning here
- * — this is a true chronological sequence — so the rail and the dots are
- * information, not decoration.
+ * Justin's day job is logistics software, so the metaphor is literal: each
+ * role is a scan event with a timestamp, the current role is "in transit",
+ * and education is the origin scan.
+ *
+ * Every word here comes from resumeData.json — the same file that drives the
+ * /resume page and the PDF — so the site can never drift from the resume.
  */
 
 type Kind = 'experience' | 'education';
@@ -21,71 +23,36 @@ interface ScanEvent {
   title: string;
   organization: string;
   start: string;
-  end: string | 'Present';
-  location?: string;
+  end: string;
   notes: string[];
   tags: string[];
 }
 
+const toNotes = (description: string) =>
+  description
+    .split('\n')
+    .map((l) => l.replace(/^•\s*/, '').trim())
+    .filter(Boolean);
+
 const events: ScanEvent[] = [
-  {
-    kind: 'experience',
-    title: 'Software Engineer',
-    organization: 'Global Med Logistics',
-    start: 'Feb 2024',
-    end: 'Present',
-    notes: [
-      'Led the migration from virtual machines to Azure Container Apps Jobs (Docker), building the C# and Python services that run on it. Deployments got 5× faster; infrastructure cost dropped 80%.',
-      'Automated the shipment data pipeline in Python and C# on scheduled Azure container jobs, writing to PostgreSQL and cutting manual processing by 40%.',
-      'Engineered a high-availability API gateway on Azure API Management, backed by C# services, for real-time tracking across third-party partners.',
-      'Own the PostgreSQL data layer behind medical device tracking for Stryker: 99.9% uptime and 100% data accuracy across 100k+ monthly transactions.',
-    ],
-    tags: ['C#', 'Python', 'PostgreSQL', 'Automation', 'Azure', 'Docker'],
-  },
-  {
-    kind: 'experience',
-    title: 'Website Developer Intern',
-    organization: 'Engaj Media',
-    start: 'May 2023',
-    end: 'Dec 2023',
-    notes: [
-      'Shipped a TypeScript/React landing page in a Scrum team, with lazy loading and component optimization that lifted consultation requests 35%.',
-      'Refactored for cross-browser compatibility and mobile responsiveness.',
-    ],
-    tags: ['TypeScript', 'React', 'Figma', 'UI/UX'],
-  },
-  {
-    kind: 'experience',
-    title: 'Freelance Software Engineer',
-    organization: 'YongMen Law P.C.',
-    start: 'Dec 2022',
-    end: 'Mar 2023',
-    notes: [
-      'Built a client communication system on the Mailchimp API, reducing manual follow-ups by 30%.',
-      'Diagnosed bounce and exit pages in Google Analytics and shipped UI/SEO fixes that grew traffic 25% month over month.',
-    ],
-    tags: ['JavaScript', 'React', 'Mailchimp API', 'SEO'],
-  },
-  {
-    kind: 'education',
-    title: 'Full Stack Software Engineering',
-    organization: 'App Academy',
-    start: 'Feb 2022',
-    end: 'Nov 2022',
-    notes: [
-      'Immersive program covering algorithms, full-stack web development, and team projects run on Agile.',
-    ],
-    tags: ['JavaScript', 'Python', 'React', 'Redux', 'SQL'],
-  },
-  {
-    kind: 'education',
-    title: 'Business Administration coursework',
-    organization: 'Georgia State University',
-    start: 'Aug 2014',
-    end: 'Jul 2017',
-    notes: ['Coursework in business administration and management.'],
-    tags: ['Project management', 'SQL', 'Power BI', 'Scrum'],
-  },
+  ...resumeData.experience.map((j) => ({
+    kind: 'experience' as const,
+    title: j.position,
+    organization: j.company,
+    start: j.startDate,
+    end: j.endDate,
+    notes: toNotes(j.description),
+    tags: j.tags ?? [],
+  })),
+  ...resumeData.education.map((e) => ({
+    kind: 'education' as const,
+    title: e.degree,
+    organization: e.institution,
+    start: e.startDate,
+    end: e.endDate,
+    notes: toNotes(e.description ?? ''),
+    tags: e.tags ?? [],
+  })),
 ];
 
 const ScanRow: React.FC<{ event: ScanEvent; index: number }> = ({ event, index }) => {
@@ -132,22 +99,26 @@ const ScanRow: React.FC<{ event: ScanEvent; index: number }> = ({ event, index }
           {event.start} to {event.end}
         </div>
 
-        <ul className="mt-3 space-y-2 text-sm leading-relaxed text-foreground/85">
-          {event.notes.map((note, i) => (
-            <li key={i} className="flex gap-2.5">
-              <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
-              <span>{note}</span>
-            </li>
-          ))}
-        </ul>
+        {event.notes.length > 0 && (
+          <ul className="mt-3 space-y-2 text-sm leading-relaxed text-foreground/85">
+            {event.notes.map((note, i) => (
+              <li key={i} className="flex gap-2.5">
+                <span aria-hidden className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/70" />
+                <span>{note}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {event.tags.map((tag) => (
-            <span key={tag} className="chip">
-              {tag}
-            </span>
-          ))}
-        </div>
+        {event.tags.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {event.tags.map((tag) => (
+              <span key={tag} className="chip">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </motion.li>
   );

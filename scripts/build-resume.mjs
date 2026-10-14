@@ -1,5 +1,10 @@
-// Renders src/data/resumeData.json to public/Jung Gu Resume.pdf with headless Chrome.
+// Renders src/data/resumeData.json to public/Jung_Gu_Resume.pdf with headless Chrome.
 // Run: npm run resume:pdf
+//
+// NOTE: public/Jung_Gu_Resume.pdf is currently the hand-made resume. Running this
+// script overwrites it with a generated layout from the same data. Either keep
+// the hand-made PDF and resumeData.json in sync by hand, or adopt this script as
+// the only way the PDF is produced — not both.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
@@ -35,7 +40,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(p.na
 <div class="title">${esc(p.title)}</div>
 <div class="contact">
   <span>${esc(p.email)}</span><span>${esc(p.phone)}</span><span>${esc(p.location)}</span>
-  <span>${esc(p.linkedin.replace(/^www\./, ''))}</span><span>${esc(p.github.replace(/^https?:\/\//, ''))}</span><span>${esc(p.website)}</span>
+  <span>${esc(p.linkedin)}</span><span>${esc(p.github.replace(/^https?:\/\//, ''))}</span><span>${esc(p.website)}</span>
 </div>
 
 <h2>Summary</h2>
@@ -53,7 +58,7 @@ ${experience.map((j) => `
 
 <h2>Education</h2>
 ${education.map((e) => `
-<div class="edu"><div class="row"><span><strong>${esc(e.institution)}</strong> <span class="org">· ${esc(e.degree)}</span></span><span class="date">${esc(e.startDate)} – ${esc(e.endDate)}</span></div><p>${esc(e.description)}</p></div>`).join('')}
+<div class="edu"><div class="row"><span><strong>${esc(e.institution)}</strong> <span class="org">· ${esc(e.degree)}</span></span><span class="date">${esc(e.startDate)} – ${esc(e.endDate)}</span></div>${e.description ? `<p>${esc(e.description)}</p>` : ''}</div>`).join('')}
 
 <h2>Languages</h2>
 <p style="margin:0 0 0">${languages.map((l) => `${esc(l.language)} (${esc(l.proficiency)})`).join(' · ')}</p>
@@ -64,6 +69,6 @@ const htmlPath = resolve('.resume-build/resume.html');
 writeFileSync(htmlPath, html);
 
 const chrome = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const out = resolve('public/Jung Gu Resume.pdf');
+const out = resolve('public/Jung_Gu_Resume.pdf');
 execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', `--print-to-pdf=${out}`, `file://${htmlPath}`], { stdio: 'ignore' });
 console.log(`Wrote ${out}`);
