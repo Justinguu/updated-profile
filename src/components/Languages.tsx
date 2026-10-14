@@ -5,7 +5,7 @@ import React from 'react';
  * a percentage could.
  */
 const languages = [
-  { name: 'English', native: 'English', level: 'Native' },
+  { name: 'English', native: '', level: 'Native' },
   { name: 'Korean', native: '한국어', level: 'Fluent' },
 ];
 
@@ -18,7 +18,7 @@ const Languages: React.FC = () => (
         <div key={l.name} className="py-4 first:pt-0 last:pb-0">
           <dt className="flex items-baseline gap-2">
             <span className="text-sm font-semibold text-foreground">{l.name}</span>
-            <span className="font-mono text-xs text-muted-foreground">{l.native}</span>
+            {l.native && <span className="font-mono text-xs text-muted-foreground">{l.native}</span>}
           </dt>
           <dd className="mt-1 text-sm text-muted-foreground">{l.level}</dd>
         </div>

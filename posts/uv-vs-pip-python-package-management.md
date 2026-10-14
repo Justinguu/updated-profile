@@ -4,6 +4,7 @@ date: "2025-06-20"
 author: "Justin Gu"  
 tags: ["Python", "Package Management", "UV", "pip", "Development Tools", "Performance"]  
 category: "Python Development"  
+kicker: "Python tooling"
 description: "Where uv is faster than pip, where it is not a drop-in, and the commands to switch a project over."
 ---
 

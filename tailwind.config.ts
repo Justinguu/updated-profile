@@ -46,6 +46,7 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
         track: "hsl(var(--track))",
+        signal: "hsl(var(--signal))",
       },
       fontFamily: {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui", "sans-serif"],

@@ -18,19 +18,20 @@
     --card-foreground: 222 40% 9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 40% 9%;
-    --primary: 22 82% 51%;            /* #E8641B cargo orange */
+    --primary: 22 85% 38%;            /* #B34B0F cargo orange, text grade: 5.3:1 on white, 4.7:1 on the ground */
+    --signal: 22 82% 51%;             /* #E8641B the bright orange, for the scan dot, rail and pulse only */
     --primary-foreground: 0 0% 100%;
     --secondary: 214 20% 91%;
     --secondary-foreground: 222 40% 9%;
     --muted: 214 20% 91%;
     --muted-foreground: 213 17% 43%;  /* #5B6B7F steel */
-    --accent: 22 82% 51%;
+    --accent: 22 85% 38%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214 18% 86%;
     --input: 214 18% 86%;
-    --ring: 22 82% 51%;
+    --ring: 22 85% 38%;
     --radius: 0.75rem;
     --track: 214 18% 82%;             /* timeline rail */
   }
@@ -42,7 +43,8 @@
     --card-foreground: 214 30% 93%;
     --popover: 220 36% 12%;
     --popover-foreground: 214 30% 93%;
-    --primary: 22 88% 56%;            /* slightly brighter on ink */
+    --primary: 22 88% 56%;            /* 6:1 on ink; bright enough to stay the accent */
+    --signal: 22 88% 56%;
     --primary-foreground: 222 48% 8%;
     --secondary: 219 30% 17%;
     --secondary-foreground: 214 30% 93%;
@@ -102,7 +104,7 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-[hsl(22_82%_45%)] dark:hover:bg-[hsl(22_88%_62%)];
+    @apply inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-[hsl(22_85%_32%)] dark:hover:bg-[hsl(22_88%_62%)];
   }
   .btn-ghost {
     @apply inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary;
@@ -135,7 +137,7 @@
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  background: hsl(var(--primary));
+  background: hsl(var(--signal));
   animation: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
@@ -145,12 +147,10 @@
   html { scroll-behavior: auto; }
 }
 
-/* Legacy */
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-down { animation: fadeInDown 0.5s ease-out; }
 
-.print-light-mode { background-color: white !important; color: black !important; }
-.print-light-mode * { color: black !important; background-color: transparent !important; }
+/* Code blocks scroll sideways; the fade says so without a scrollbar. */
+.code-scroll { position: relative; }
+.code-scroll::after {
+  content: ""; position: absolute; inset-block: 0; right: 0; width: 2.5rem; pointer-events: none;
+  background: linear-gradient(to right, transparent, hsl(222 48% 8%));
+}

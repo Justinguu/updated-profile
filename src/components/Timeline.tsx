@@ -82,7 +82,7 @@ const ScanRow: React.FC<{ event: ScanEvent }> = ({ event }) => {
         <span
           className={cn(
             'relative mt-1.5 block h-3 w-3 rounded-full ring-4 ring-card',
-            live ? 'scan-live bg-primary' : event.kind === 'education' ? 'border-2 border-track bg-card' : 'bg-foreground/70',
+            live ? 'scan-live bg-signal' : event.kind === 'education' ? 'border-2 border-track bg-card' : 'bg-foreground/70',
           )}
         />
       </div>
@@ -113,7 +113,7 @@ const ScanRow: React.FC<{ event: ScanEvent }> = ({ event }) => {
             href="/resume"
             className="mt-3 inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
-            {event.more} more on the full record
+            {event.more} more on the résumé
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
           </Link>
         )}
@@ -140,10 +140,9 @@ const Timeline: React.FC = () => {
         <div>
           <p className="eyebrow">Tracking history</p>
           <h2 id="history-heading" className="display mt-2 text-2xl font-bold text-foreground sm:text-3xl">
-            Where I&apos;ve shipped from
+            Shipping record
           </h2>
         </div>
-        <p className="font-mono text-xs text-muted-foreground">newest first</p>
       </header>
 
       <ol>{experience.map((e) => <ScanRow key={`${e.organization}-${e.start}`} event={e} />)}</ol>

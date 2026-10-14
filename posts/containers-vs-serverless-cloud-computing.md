@@ -4,6 +4,7 @@ date: "2025-05-15"
 author: "Justin Gu"  
 tags: ["Cloud Computing", "Containers", "Serverless", "Docker", "Azure Functions", "DevOps", "Microservices"]  
 category: "Cloud Architecture"  
+kicker: "Azure"
 description: "When a container is the right call, when a function is, and how I would decide for a new service on Azure."
 ---
 

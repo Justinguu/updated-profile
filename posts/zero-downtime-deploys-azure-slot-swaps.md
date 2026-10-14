@@ -4,6 +4,7 @@ date: "2026-10-14"
 author: "Justin Gu"
 tags: ["Azure", "App Service", "GitHub Actions", "CI/CD", ".NET", "Blazor"]
 category: "CI/CD"
+kicker: "Azure App Service"
 description: "How I set up staging slot swaps for a Blazor app so a deploy never interrupts anyone, and the Data Protection key problem that took a few swaps to understand."
 ---
 

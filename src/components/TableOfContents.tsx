@@ -40,18 +40,16 @@ export default function TableOfContents({ headings, className }: TableOfContents
 
   return (
     <nav aria-label="Contents" className={cn('panel p-5', className)}>
+      <p className="eyebrow hidden lg:block">Contents</p>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls={listId}
-        className="flex w-full items-center justify-between gap-3 text-left lg:pointer-events-none"
+        className="flex w-full items-center justify-between gap-3 text-left lg:hidden"
       >
         <span className="eyebrow">Contents</span>
-        <ChevronDown
-          aria-hidden
-          className={cn('h-4 w-4 text-muted-foreground transition-transform lg:hidden', !open && '-rotate-90')}
-        />
+        <ChevronDown aria-hidden className={cn('h-4 w-4 text-muted-foreground transition-transform', !open && '-rotate-90')} />
       </button>
 
       <ol id={listId} className={cn('mt-3 space-y-1', !open && 'hidden lg:block')}>

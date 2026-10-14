@@ -4,6 +4,7 @@ date: "2025-04-10"
 author: "Justin Gu"  
 tags: ["Python", "Generative AI", "AI Development", "Machine Learning", "Coding Projects"]  
 category: "Python Development"  
+kicker: "Generative AI"
 description: "A project-based route into Python: build a text adventure that uses a language model, and learn the basics on the way."
 ---
 

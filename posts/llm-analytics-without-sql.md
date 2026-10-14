@@ -4,6 +4,7 @@ date: "2026-10-14"
 author: "Justin Gu"
 tags: ["AI", "LLM", "Claude API", "Tool use", ".NET", "PostgreSQL", "Blazor"]
 category: "AI"
+kicker: "Claude API tool use"
 description: "I built two features on the Claude API for our operations platform: one that turns a sentence into a KPI dashboard, and one that answers questions from warehouse data. Neither one is allowed to write a query. Here is how that works."
 ---
 

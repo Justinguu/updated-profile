@@ -33,7 +33,7 @@ const AboutMe: React.FC = () => {
       {/* Faint rail in the background ties the hero to the tracking timeline below */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-6 hidden w-px bg-gradient-to-b from-transparent via-track to-transparent sm:left-8 lg:left-10 lg:block"
+        className="pointer-events-none absolute inset-y-0 left-6 hidden w-px bg-gradient-to-b from-transparent via-signal/40 to-transparent sm:left-8 lg:left-10 lg:block"
       />
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
@@ -89,9 +89,9 @@ const AboutMe: React.FC = () => {
             </a>
             <a
               href="#history"
-              className="inline-flex items-center gap-1.5 px-1 py-2 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+              className="hidden items-center gap-1.5 px-1 py-2 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
             >
-              Tracking history
+              See the record
               <ArrowDown className="h-3.5 w-3.5" aria-hidden />
             </a>
           </div>

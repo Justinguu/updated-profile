@@ -34,7 +34,7 @@ const components: Components = {
         <div className="flex items-center justify-between border-b border-border bg-secondary px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
           <span>{match[1]}</span>
         </div>
-        <div className="overflow-x-auto">
+        <div className="code-scroll overflow-x-auto">
           <SyntaxHighlighter
             style={oneDark}
             language={match[1]}

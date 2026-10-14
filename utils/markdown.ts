@@ -13,6 +13,7 @@ export interface PostData {
   readTime: string;
   tags: string[];
   category: string;
+  kicker?: string;
   description: string;
   author: string;
 }

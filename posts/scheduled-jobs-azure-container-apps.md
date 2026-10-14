@@ -4,6 +4,7 @@ date: "2026-10-14"
 author: "Justin Gu"
 tags: ["Azure", "Container Apps", "Docker", ".NET", "Python", "Scheduled jobs", "Observability"]
 category: "Containers"
+kicker: "Azure Container Apps Jobs"
 description: "What it took to replace an always-on virtual machine full of cron jobs with containers that run on a schedule, and why I ended up building a control panel for them inside the main app."
 ---
 

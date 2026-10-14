@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,14 +12,24 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Blog", href: "/blog" },
   { name: "Resume", href: "/resume" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
+  const reduce = useReducedMotion();
   const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+    href === "/" ? pathname === "/" : href.startsWith("/#") ? false : pathname.startsWith(href);
+
+  // Escape closes the phone menu, the way a menu is expected to behave.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setIsOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -30,7 +40,7 @@ export default function Navbar() {
             JG
           </span>
           <span className="hidden font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground sm:inline">
-            Software engineer
+            Jung Gu
           </span>
         </Link>
 
@@ -80,10 +90,10 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             className="border-t border-border bg-background md:hidden"
-            initial={{ opacity: 0, y: -8 }}
+            initial={reduce ? false : { opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18 }}
+            exit={reduce ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: reduce ? 0 : 0.18 }}
           >
             <div className="space-y-1 px-4 py-3">
               {navLinks.map((link) => (

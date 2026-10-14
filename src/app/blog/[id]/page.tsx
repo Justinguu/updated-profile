@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -55,8 +54,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
       <header className="mt-6">
         <dl className="flex flex-wrap items-baseline gap-x-5 gap-y-1 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          <div className="flex gap-2"><dt className="sr-only">Category</dt><dd className="text-primary">{post.category}</dd></div>
-          <div className="flex gap-2"><dt>Logged</dt><dd className="text-foreground/80">{post.date}</dd></div>
+          <div className="flex gap-2"><dt className="sr-only">Category</dt><dd className="text-primary">{post.category}{post.kicker && <span className="text-muted-foreground"> · {post.kicker}</span>}</dd></div>
+          <div className="flex gap-2"><dt>Published</dt><dd className="text-foreground/80">{post.date}</dd></div>
           <div className="flex gap-2"><dt>Read</dt><dd className="text-foreground/80">{post.readTime}</dd></div>
         </dl>
         <h1 className="display mt-4 max-w-4xl text-balance text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl">
@@ -67,20 +66,11 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_16rem]">
         <div className="min-w-0">
-          <Image
-            src={`/images/${post.id}.png`}
-            alt=""
-            width={1200}
-            height={630}
-            priority
-            className="w-full rounded-xl border border-border"
-          />
-
-          <div className="mt-8 lg:hidden">
+          <div className="lg:hidden">
             <TableOfContents headings={post.headings} />
           </div>
 
-          <article className="mt-8 max-w-[70ch]">
+          <article className="mt-6 max-w-[70ch]">
             <MarkdownContent content={post.content} />
           </article>
 
