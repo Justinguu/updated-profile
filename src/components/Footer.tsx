@@ -1,29 +1,12 @@
-import { lookup } from "node:dns/promises";
 import AIChatButton from "./AIChatButton";
 import resumeData from "@/data/resumeData.json";
 
 /**
- * The chat route needs Supabase (vector store) and OpenAI to answer. The
- * button is rendered only when both are configured AND the Supabase host
- * actually resolves. This runs at build time (the layout is static), so a
- * deleted or paused Supabase project hides the chat on the next deploy
- * instead of showing visitors a button that hangs.
+ * The chat answers from the resume JSON with one OpenAI call, so the only
+ * thing it needs is the key. No key, no button.
  */
-async function chatBackendReachable(): Promise<boolean> {
-  const url = process.env.SUPABASE_URL;
-  if (!url || !process.env.OPENAI_API_KEY) return false;
-  try {
-    await lookup(new URL(url).host);
-    return true;
-  } catch {
-    console.warn("[footer] Supabase host does not resolve; hiding the chat button.");
-    return false;
-  }
-}
-
-/** The last line on every page ends on the person, not the framework. */
-export default async function Footer() {
-  const chatEnabled = await chatBackendReachable();
+export default function Footer() {
+  const chatEnabled = !!process.env.OPENAI_API_KEY;
   const { personalInfo } = resumeData;
 
   return (

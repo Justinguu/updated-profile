@@ -7,8 +7,6 @@
     "dev:3003": "next dev -p 3003",
     "dev:3004": "next dev -p 3004",
     "build": "next build",
-    "build:with-generate": "npm run generate && next build",
-    "generate": "npx ts-node ./scripts/generate.ts",
     "start": "next start",
     "start:3003": "next start -p 3003",
     "start:3004": "next start -p 3004",
@@ -16,7 +14,6 @@
     "resume:pdf": "node scripts/build-resume.mjs"
   },
   "dependencies": {
-    "@langchain/openai": "^0.0.13",
     "@nextui-org/avatar": "^2.0.30",
     "@nextui-org/card": "^2.0.31",
     "@nextui-org/system": "^2.2.2",
@@ -25,14 +22,11 @@
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
-    "@supabase/supabase-js": "^2.46.2",
     "ai": "^2.2.32",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dotenv": "^16.4.1",
     "framer-motion": "^11.3.2",
     "gray-matter": "^4.0.3",
-    "langchain": "^0.1.11",
     "lucide-react": "^0.320.0",
     "next": "14.1.0",
     "next-themes": "^0.2.1",
@@ -43,8 +37,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "reading-time": "^1.5.0",
     "remark-gfm": "^4.0.0",
-    "tailwind-merge": "^2.6.0",
-    "ts-node": "^10.9.2"
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -60,8 +53,5 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  },
-  "overrides": {
-    "@langchain/core": "0.1.20"
   }
 }

@@ -1,157 +1,105 @@
-// File: src/lib/chatbot.ts
+import OpenAI from "openai";
+import { StreamingTextResponse } from "ai";
+import resumeData from "@/data/resumeData.json";
 
-import { getVectorStore } from "@/lib/supabase";
-import { AIMessage, HumanMessage } from "@langchain/core/messages";
-import {
-  ChatPromptTemplate,
-  MessagesPlaceholder,
-  PromptTemplate,
-} from "@langchain/core/prompts";
-import { ChatOpenAI } from "@langchain/openai";
-import {
-  LangChainStream,
-  StreamingTextResponse,
-  Message as VercelChatMessage,
-} from "ai";
-import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
-import { createHistoryAwareRetriever } from "langchain/chains/history_aware_retriever";
-import { createRetrievalChain } from "langchain/chains/retrieval";
+/**
+ * The "Ask about me" chat. No database: the resume is small enough to sit in
+ * the prompt whole, so the model answers from the same JSON that renders the
+ * site and the PDF. Change resumeData.json and the bot knows on the next deploy.
+ */
+export const runtime = "nodejs";
 
-// Check if we have the necessary environment variables
-const hasSupabaseEnv = 
-  typeof process.env.SUPABASE_URL === 'string' && 
-  process.env.SUPABASE_URL.length > 0 &&
-  typeof process.env.OPENAI_API_KEY === 'string' && 
-  process.env.OPENAI_API_KEY.length > 0;
+const { personalInfo, experience, education, skillGroups, languages } = resumeData;
+
+const bullets = (d: string) => d.split("\n").map((l) => l.replace(/^•\s*/, "").trim()).filter(Boolean);
+
+const record = [
+  `Name: ${personalInfo.name} (goes by Justin). Title: ${personalInfo.title}. Location: ${personalInfo.location}.`,
+  `Email: ${personalInfo.email}. Phone: ${personalInfo.phone}. GitHub: ${personalInfo.github}. LinkedIn: https://${personalInfo.linkedin}. Site: https://${personalInfo.website}.`,
+  `Summary: ${personalInfo.summary}`,
+  "",
+  "Work experience:",
+  ...experience.flatMap((j) => [
+    `- ${j.position} at ${j.company}, ${j.startDate} to ${j.endDate}.`,
+    ...bullets(j.description).map((b) => `  * ${b}`),
+  ]),
+  "",
+  "Education:",
+  ...education.map((e) => `- ${e.institution}: ${e.degree}, ${e.startDate} to ${e.endDate}.${e.description ? " " + e.description : ""}`),
+  "",
+  "Technical skills:",
+  ...skillGroups.map((g) => `- ${g.name}: ${g.items.join(", ")}`),
+  "",
+  `Languages: ${languages.map((l) => `${l.language} (${l.proficiency})`).join(", ")}.`,
+  "",
+  "How I work: I take features end to end, from schema and migration through UI, pipeline and rollout, and keep them running after they ship. I work daily with IT, customer support, operations managers and division managers. Every feature is tested thoroughly and schema changes run against a staging copy before production. Cutovers come with a runbook and scheduled jobs with a control panel.",
+  "Writing: I keep notes from the build at https://jgu-portfolio.vercel.app/blog, on zero-downtime deploys with Azure App Service slot swaps, moving scheduled jobs to Azure Container Apps Jobs, and LLM analytics that never write SQL.",
+  "Availability: open to full-time engineering roles and contract work. Email is the fastest way to reach me.",
+].join("\n");
+
+const systemPrompt = `You are the assistant on Jung "Justin" Gu's portfolio site, answering visitors (usually recruiters and engineers) on his behalf. Speak in first person as Justin.
+
+Rules:
+- Answer only from the record below. If it does not contain the answer, say so plainly and point to the resume page (/resume), the blog (/blog), GitHub or LinkedIn, or suggest emailing me.
+- Never invent employers, dates, numbers, degrees, certifications or technologies.
+- Be concise: a short paragraph or a few bullets, under 150 words unless asked for detail. Plain language, no hype.
+- Use markdown links for the resume (/resume), the blog (/blog), GitHub (${personalInfo.github}) and LinkedIn (https://${personalInfo.linkedin}).
+- Do not share the phone number unless asked for it directly; email is the preferred contact.
+
+Record:
+${record}`;
+
+const MAX_TURNS = 12;
 
 export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const messages = body.messages;
-
-    const chatHistory = messages
-      .slice(0, -1)
-      .map((m: VercelChatMessage) =>
-        m.role === "user"
-          ? new HumanMessage(m.content)
-          : new AIMessage(m.content)
-      );
-
-    const currentMessageContent = messages[messages.length - 1].content;
-
-    const { stream, handlers } = LangChainStream();
-
-    const retrievalModel = new ChatOpenAI({
-      modelName: "gpt-4-1106-preview",
-      streaming: false,
-    });
-
-    const streamingModel = new ChatOpenAI({
-      modelName: "gpt-4-1106-preview",
-      streaming: true,
-      callbacks: [handlers],
-    });
-
-    const retriever = (await getVectorStore()).asRetriever({
-      k: 5
-    });
-
-    const rephrasePrompt = ChatPromptTemplate.fromMessages([
-      new MessagesPlaceholder("chat_history"),
-      ["user", "{input}"],
-      [
-        "user",
-        "Given the above conversation, generate a search query to look up information relevant to the current question. " +
-        "Focus on keywords related to skills, experiences, projects, or specific details about the portfolio owner. " +
-        "Only return the query and no other text.",
-      ],
-    ]);
-
-    const historyAwareRetrieverChain = await createHistoryAwareRetriever({
-      llm: retrievalModel,
-      retriever,
-      rephrasePrompt,
-    });
-
-    const prompt = ChatPromptTemplate.fromMessages([
-      [
-        "system",
-        `You are a chatbot representing me on my personal portfolio website. Your responses must be:
-        1. Personal - Always speak in first person ("I", "my", "me")
-        2. Detailed but concise - Provide meaningful information without being overwhelming
-        3. Based STRICTLY on the provided context - DO NOT make assumptions or add information not present in the context
-        4. Engaging and professional
-
-        Rules:
-        - Always respond as if you are me, the portfolio owner
-        - ONLY share information that is explicitly present in the provided context
-        - If information is not in the context, do not make assumptions. Instead, suggest relevant portfolio sections:
-          - For projects and code: "You can see my work on [GitHub](https://github.com/Justinguu)"
-          - For skills: "Check out my [GitHub](https://github.com/Justinguu) for an overview of my technical skills"
-          - For experience: "Visit my [LinkedIn](https://www.linkedin.com/in/jung-gu/) for my complete professional history"
-        - Include 2-3 relevant details when discussing skills or experiences, but ONLY if they are explicitly mentioned in the context
-        - Use markdown links to reference portfolio sections or external profiles
-        - Keep responses informative but conversational
-        - If asked about education or qualifications, ONLY mention what is explicitly stated in the context
-        - DO NOT make assumptions about degrees, certifications, or qualifications not explicitly mentioned
-        
-        Context:
-        {context}`,
-      ],
-      new MessagesPlaceholder("chat_history"),
-      ["user", "{input}"],
-    ]);
-
-    const combineDocsChain = await createStuffDocumentsChain({
-      llm: streamingModel,
-      prompt,
-      documentPrompt: PromptTemplate.fromTemplate(
-        "{page_content}",
-      ),
-      documentSeparator: "\n--------\n",
-    });
-
-    const retrievalChain = await createRetrievalChain({
-      combineDocsChain,
-      retriever: historyAwareRetrieverChain,
-    });
-
-    const resultPromise = retrievalChain.invoke({
-      input: currentMessageContent,
-      chat_history: chatHistory,
-    });
-
-    const response = new StreamingTextResponse(stream);
-
-    resultPromise.then((result) => {
-      if (!result.answer) {
-        handlers.handleLLMError(new Error("No response generated"), "no_response");
-        return;
-      }
-    }).catch((error) => {
-      handlers.handleLLMError(error, "chain_error");
-    });
-
-    return response;
-  } catch (error: any) {
-    console.error("Chat API error:", error);
-    
-    const errorMessage = error?.message || "Unknown error occurred";
-    return Response.json(
-      { 
-        error: "Chat processing failed", 
-        details: errorMessage,
-        code: error?.code || "UNKNOWN_ERROR"
-      }, 
-      { status: 500 }
-    );
+  if (!process.env.OPENAI_API_KEY) {
+    return Response.json({ error: "Chat is not configured." }, { status: 503 });
   }
-}
 
-function sanitizeResponse(response: string): string {
-  if (!response) return "";
-  
-  return response
-    .replace(/<\/?[^>]+(>|$)/g, "")
-    .trim();
+  let body: { messages?: { role: string; content: string }[] };
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Bad request." }, { status: 400 });
+  }
+
+  const history = (body.messages ?? [])
+    .filter((m) => (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
+    .slice(-MAX_TURNS)
+    .map((m) => ({ role: m.role as "user" | "assistant", content: m.content.slice(0, 4000) }));
+
+  if (history.length === 0 || history[history.length - 1].role !== "user") {
+    return Response.json({ error: "Send a message to answer." }, { status: 400 });
+  }
+
+  try {
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      stream: true,
+      temperature: 0.3,
+      max_tokens: 500,
+      messages: [{ role: "system", content: systemPrompt }, ...history],
+    });
+    // Plain text chunks; useChat in this version of the ai package reads exactly that.
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream<Uint8Array>({
+      async start(controller) {
+        try {
+          for await (const chunk of completion) {
+            const text = chunk.choices[0]?.delta?.content ?? "";
+            if (text) controller.enqueue(encoder.encode(text));
+          }
+        } catch (error) {
+          console.error("[chat] stream interrupted:", error);
+        } finally {
+          controller.close();
+        }
+      },
+    });
+    return new StreamingTextResponse(stream);
+  } catch (error) {
+    console.error("[chat] OpenAI request failed:", error);
+    return Response.json({ error: "The assistant is unavailable right now." }, { status: 502 });
+  }
 }

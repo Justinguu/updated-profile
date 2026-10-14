@@ -4,7 +4,6 @@ This project is a modern portfolio website built with Next.js 14, featuring AI-p
 
 ## Key Features
 
-- **AI-powered Chatbot**: Interactive portfolio exploration using LangChain and OpenAI, with vector search capabilities through Supabase pgvector
 - **Tech Stack Architecture Visualization**: Interactive drag-and-drop interface to design and validate technology stacks with AI feedback
 - **GitHub Integration**: Dynamic GitHub statistics, featured projects, and contribution graphs
 - **Responsive Design**: Fully responsive UI with dark/light mode support using Tailwind CSS and NextUI components
@@ -16,10 +15,7 @@ This project is a modern portfolio website built with Next.js 14, featuring AI-p
 - **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS, NextUI components, Framer Motion
-- **Database**: Supabase with pgvector for vector embeddings
 - **AI/ML**: 
-  - LangChain for chat functionality
-  - OpenAI for embeddings and completions
   - ReactFlow for tech stack visualization
 - **GitHub API**: Octokit for repository and contribution data
 - **UI Components**: 
@@ -67,9 +63,6 @@ Before you begin, ensure you have:
    # OpenAI
    OPENAI_API_KEY=your_openai_api_key
 
-   # Supabase
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
    # GitHub
    NEXT_PUBLIC_GITHUB_TOKEN=your_github_token
@@ -78,22 +71,16 @@ Before you begin, ensure you have:
    ```
 
 4. **Database Setup**
-   Run the following SQL in your Supabase SQL editor to set up vector search:
    ```sql
-   -- Enable the pgvector extension
-   create extension if not exists vector;
 
-   -- Create documents table for vector storage
    create table if not exists documents (
      id bigserial primary key,
      content text,
      metadata jsonb,
-     embedding vector(1536)
    );
 
    -- Create the matching function
    create or replace function match_documents(
-     query_embedding vector(1536),
      filter jsonb default '{}'::jsonb,
      match_count int default 10
    ) returns table (
@@ -110,10 +97,8 @@ Before you begin, ensure you have:
        id,
        content,
        metadata,
-       1 - (documents.embedding <=> query_embedding) as similarity
      from documents
      where metadata @> filter
-     order by documents.embedding <=> query_embedding
      limit match_count;
    end;
    $$;
@@ -150,7 +135,6 @@ Before you begin, ensure you have:
 │   │   └── AIChatBox.tsx # AI chatbot implementation
 │   ├── lib/              # Utility functions and API clients
 │   │   ├── github.ts     # GitHub API integration
-│   │   └── supabase.ts   # Supabase and vector store setup
 │   └── data/             # Static data and configuration
 ├── public/               # Static assets
 ├── scripts/              # Build and generation scripts
@@ -162,7 +146,6 @@ Before you begin, ensure you have:
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production (includes content generation)
-- `npm run generate` - Generate static content
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 
