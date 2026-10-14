@@ -1,10 +1,10 @@
 ---  
-title: "Containers vs Serverless: Choosing the Right Cloud Computing Paradigm"  
+title: "Containers or serverless: choosing for a new service on Azure"
 date: "2025-05-15"  
 author: "Justin Gu"  
 tags: ["Cloud Computing", "Containers", "Serverless", "Docker", "Azure Functions", "DevOps", "Microservices"]  
 category: "Cloud Architecture"  
-description: "Dive into the exciting world of modern cloud computing! This comprehensive guide compares container-based and serverless architectures, helping you make informed decisions for your next project with practical examples and real-world use cases."  
+description: "When a container is the right call, when a function is, and how I would decide for a new service on Azure."
 ---
 
 ## Introduction

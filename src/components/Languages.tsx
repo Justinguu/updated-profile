@@ -6,7 +6,7 @@ import React from 'react';
  */
 const languages = [
   { name: 'English', native: 'English', level: 'Native' },
-  { name: 'Korean', native: '한국어', level: 'Fluent · speaking & listening; professional reading & writing' },
+  { name: 'Korean', native: '한국어', level: 'Fluent' },
 ];
 
 const Languages: React.FC = () => (

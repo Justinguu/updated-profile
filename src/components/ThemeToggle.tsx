@@ -6,30 +6,26 @@ import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  // Reserve the space before mount so the nav does not shift when it appears.
+  if (!mounted) return <span aria-hidden className="inline-block h-10 w-10" />;
+
+  const dark = resolvedTheme === "dark";
 
   return (
-    <button 
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative h-6 w-6"
-      suppressHydrationWarning
+    <button
+      type="button"
+      onClick={() => setTheme(dark ? "light" : "dark")}
+      aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-pressed={dark}
+      className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary"
     >
-      <Sun
-        size={24}
-        className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-      />
-      <Moon
-        size={24}
-        className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-      />
+      {dark ? <Sun className="h-5 w-5" aria-hidden /> : <Moon className="h-5 w-5" aria-hidden />}
     </button>
   );
 }

@@ -58,16 +58,16 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <div className="ml-3 border-l border-border pl-3">
+          <div className="ml-2 border-l border-border pl-2">
             <ThemeToggle />
           </div>
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-1 md:hidden">
           <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="rounded-md p-1.5 text-foreground"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary"
             aria-expanded={isOpen}
             aria-label={isOpen ? "Close menu" : "Open menu"}
           >

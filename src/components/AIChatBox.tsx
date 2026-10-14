@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Message, useChat } from "ai/react";
-import { Bot, SendHorizontal, Trash, XCircle } from "lucide-react";
+import { Bot, SendHorizontal, Trash, XCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
@@ -31,7 +31,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
       const errorMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: `An error occurred: ${error?.message || 'Something went wrong. Please try refreshing the page if this persists.'}`,
+        content: 'I could not reach the assistant just now. Email Justin at justinguuu@gmail.com and he will answer directly.',
       };
       setMessages([...messages, errorMessage]);
     }
@@ -47,7 +47,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
       const errorMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: `Failed to send message: ${err?.message || 'Please try again.'}`,
+        content: 'That message did not send. Try once more, or email Justin at justinguuu@gmail.com.',
       };
       setMessages([...messages, errorMessage]);
     }
@@ -96,7 +96,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
           ))}
           {isLoading && lastMessageIsUser && (
             <div className="flex items-center gap-2">
-              <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-primary"></div>
+              <Loader2 className="h-4 w-4 animate-spin text-primary" aria-hidden />
             </div>
           )}
           {error && (
@@ -104,7 +104,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
               message={{
                 id: "error",
                 role: "assistant",
-                content: error?.message || "Something went wrong. Please try again!",
+                content: "I could not reach the assistant just now. Email Justin at justinguuu@gmail.com and he will answer directly.",
               }}
             />
           )}
@@ -210,7 +210,7 @@ function ChatMessage({ message: { role, content } }: ChatMessageProps) {
               );
             },
             pre: ({ node, ...props }) => (
-              <pre {...props} className="bg-gray-100 rounded p-3 overflow-auto mt-3 first:mt-0" />
+              <pre {...props} className="mt-3 overflow-auto rounded-md bg-secondary p-3 font-mono text-xs first:mt-0" />
             ),
             h1: ({ node, ...props }) => (
               <h1 {...props} className="text-3xl font-bold mt-4 first:mt-0" />
@@ -231,16 +231,16 @@ function ChatMessage({ message: { role, content } }: ChatMessageProps) {
               <h6 {...props} className="text-sm font-bold mt-3 first:mt-0" />
             ),
             table: ({ node, ...props }) => (
-              <table {...props} className="w-full mt-3 border-collapse border border-gray-200 first:mt-0" />
+              <table {...props} className="mt-3 w-full border-collapse border border-border first:mt-0" />
             ),
             thead: ({ node, ...props }) => (
-              <thead {...props} className="bg-gray-100" />
+              <thead {...props} className="bg-secondary" />
             ),
             tbody: ({ node, ...props }) => (
               <tbody {...props} />
             ),
             tr: ({ node, ...props }) => (
-              <tr {...props} className="border-t border-gray-200" />
+              <tr {...props} className="border-t border-border" />
             ),
             th: ({ node, ...props }) => (
               <th {...props} className="px-4 py-2 text-left font-semibold" />

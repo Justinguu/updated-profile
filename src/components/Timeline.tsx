@@ -1,19 +1,20 @@
-'use client';
-
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import resumeData from '@/data/resumeData.json';
 
 /**
  * Work history, presented as a shipment tracking record.
  *
- * Justin's day job is logistics software, so the metaphor is literal: each
- * role is a scan event with a timestamp, the current role is "in transit",
- * and education is the origin scan.
+ * Each role is a scan event with a timestamp, the current role is "in
+ * transit", and education is the origin scan. Every word comes from
+ * resumeData.json, the same file that drives /resume and the PDF.
  *
- * Every word here comes from resumeData.json — the same file that drives the
- * /resume page and the PDF — so the site can never drift from the resume.
+ * The home page's job is to make someone open the resume, not to be it: a
+ * role shows its first three notes and points at the full record. Rows are
+ * plain markup with no entrance animation, so the record is complete on
+ * first paint, in print, and in link previews.
  */
 
 type Kind = 'experience' | 'education';
@@ -25,8 +26,12 @@ interface ScanEvent {
   start: string;
   end: string;
   notes: string[];
+  more: number;
   tags: string[];
 }
+
+const NOTE_CAP = 3;
+const TAG_CAP = 5;
 
 const toNotes = (description: string) =>
   description
@@ -35,15 +40,19 @@ const toNotes = (description: string) =>
     .filter(Boolean);
 
 const events: ScanEvent[] = [
-  ...resumeData.experience.map((j) => ({
-    kind: 'experience' as const,
-    title: j.position,
-    organization: j.company,
-    start: j.startDate,
-    end: j.endDate,
-    notes: toNotes(j.description),
-    tags: j.tags ?? [],
-  })),
+  ...resumeData.experience.map((j) => {
+    const notes = toNotes(j.description);
+    return {
+      kind: 'experience' as const,
+      title: j.position,
+      organization: j.company,
+      start: j.startDate,
+      end: j.endDate,
+      notes: notes.slice(0, NOTE_CAP),
+      more: Math.max(0, notes.length - NOTE_CAP),
+      tags: (j.tags ?? []).slice(0, TAG_CAP),
+    };
+  }),
   ...resumeData.education.map((e) => ({
     kind: 'education' as const,
     title: e.degree,
@@ -51,22 +60,16 @@ const events: ScanEvent[] = [
     start: e.startDate,
     end: e.endDate,
     notes: toNotes(e.description ?? ''),
-    tags: e.tags ?? [],
+    more: 0,
+    tags: (e.tags ?? []).slice(0, TAG_CAP),
   })),
 ];
 
-const ScanRow: React.FC<{ event: ScanEvent; index: number }> = ({ event, index }) => {
-  const reduce = useReducedMotion();
+const ScanRow: React.FC<{ event: ScanEvent }> = ({ event }) => {
   const live = event.end === 'Present';
 
   return (
-    <motion.li
-      initial={reduce ? false : { opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.3), ease: [0.2, 0.7, 0.2, 1] }}
-      className="relative grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 sm:grid-cols-[7.5rem_auto_minmax(0,1fr)] sm:gap-x-5"
-    >
+    <li className="relative grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 sm:grid-cols-[7.5rem_auto_minmax(0,1fr)] sm:gap-x-5">
       {/* Timestamp column (desktop) */}
       <div className="hidden pt-0.5 font-mono text-xs leading-5 text-muted-foreground sm:block">
         <div className={cn(live && 'text-primary')}>{live ? 'In transit' : event.end}</div>
@@ -87,16 +90,11 @@ const ScanRow: React.FC<{ event: ScanEvent; index: number }> = ({ event, index }
       {/* Event body */}
       <div className="min-w-0 pb-9">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h3 className="text-base font-semibold leading-snug text-foreground">
-            {event.title}
-          </h3>
+          <h3 className="text-base font-semibold leading-snug text-foreground">{event.title}</h3>
           <span className="text-sm text-muted-foreground">{event.organization}</span>
-          {live && (
-            <span className="chip border-primary/40 text-primary">current</span>
-          )}
         </div>
-        <div className="mt-0.5 font-mono text-xs text-muted-foreground sm:hidden">
-          {event.start} to {event.end}
+        <div className={cn('mt-0.5 font-mono text-xs sm:hidden', live ? 'text-primary' : 'text-muted-foreground')}>
+          {live ? `In transit · since ${event.start}` : `${event.start} to ${event.end}`}
         </div>
 
         {event.notes.length > 0 && (
@@ -110,17 +108,25 @@ const ScanRow: React.FC<{ event: ScanEvent; index: number }> = ({ event, index }
           </ul>
         )}
 
+        {event.more > 0 && (
+          <Link
+            href="/resume"
+            className="mt-3 inline-flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
+          >
+            {event.more} more on the full record
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+          </Link>
+        )}
+
         {event.tags.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
+          <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Tools">
             {event.tags.map((tag) => (
-              <span key={tag} className="chip">
-                {tag}
-              </span>
+              <li key={tag} className="chip">{tag}</li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
-    </motion.li>
+    </li>
   );
 };
 
@@ -129,27 +135,25 @@ const Timeline: React.FC = () => {
   const education = events.filter((e) => e.kind === 'education');
 
   return (
-    <section id="history" className="panel scroll-mt-20 p-6 sm:p-8">
+    <section id="history" className="panel scroll-mt-20 p-6 sm:p-8" aria-labelledby="history-heading">
       <header className="mb-8 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="eyebrow">Tracking history</p>
-          <h2 className="display mt-2 text-2xl font-bold text-foreground sm:text-3xl">
+          <h2 id="history-heading" className="display mt-2 text-2xl font-bold text-foreground sm:text-3xl">
             Where I&apos;ve shipped from
           </h2>
         </div>
-        <p className="font-mono text-xs text-muted-foreground">
-          {events.length} scan events · newest first
-        </p>
+        <p className="font-mono text-xs text-muted-foreground">newest first</p>
       </header>
 
-      <ol className="sm:ml-0">{experience.map((e, i) => <ScanRow key={e.organization} event={e} index={i} />)}</ol>
+      <ol>{experience.map((e) => <ScanRow key={`${e.organization}-${e.start}`} event={e} />)}</ol>
 
       <div className="mb-6 mt-1 flex items-center gap-3">
         <span className="eyebrow">Origin</span>
         <span className="h-px flex-1 bg-border" />
       </div>
 
-      <ol>{education.map((e, i) => <ScanRow key={e.organization} event={e} index={i + experience.length} />)}</ol>
+      <ol>{education.map((e) => <ScanRow key={`${e.organization}-${e.start}`} event={e} />)}</ol>
     </section>
   );
 };

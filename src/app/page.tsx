@@ -1,8 +1,8 @@
 import React from 'react';
 import AboutMe from '@/components/AboutMe';
-import Technologies from '@/components/Technologies';
 import LatestPosts from '@/components/LatestPosts';
 import SkillsOverview from '@/components/SkillsOverview';
+import HowIWork from '@/components/HowIWork';
 import Timeline from '@/components/Timeline';
 import Languages from '@/components/Languages';
 import Hobbies from '@/components/Hobbies';
@@ -11,6 +11,8 @@ import ContactMe from '@/components/ContactMe';
 /**
  * Home. One grid, one gutter. The hero spans full width; the tracking
  * history is the widest panel below it because it's the page's centrepiece.
+ * The right column holds what the resume does not: how he works, and the
+ * competencies grouped the way the resume groups them.
  */
 const HomePage: React.FC = () => {
   return (
@@ -22,7 +24,7 @@ const HomePage: React.FC = () => {
           <Timeline />
         </div>
         <div className="flex flex-col gap-4">
-          <Technologies />
+          <HowIWork />
           <div className="flex-1">
             <SkillsOverview />
           </div>

@@ -19,10 +19,42 @@ export interface PostData {
 
 export interface PostContent extends PostData {
   content: string;
+  headings: Heading[];
+}
+
+export interface Heading {
+  id: string;
+  text: string;
+  level: 2 | 3;
+}
+
+/** One slug rule, shared by the heading renderer and the table of contents. */
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[`*_~]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-');
+}
+
+/** h2 and h3 only. Lines inside fenced code blocks are skipped. */
+export function extractHeadings(markdown: string): Heading[] {
+  const out: Heading[] = [];
+  let inFence = false;
+  for (const line of markdown.split('\n')) {
+    if (/^\s*```/.test(line)) { inFence = !inFence; continue; }
+    if (inFence) continue;
+    const m = /^(##|###)\s+(.+?)\s*#*\s*$/.exec(line);
+    if (!m) continue;
+    const text = m[2].replace(/[`*_~]/g, '');
+    out.push({ id: slugify(text), text, level: m[1].length === 2 ? 2 : 3 });
+  }
+  return out;
 }
 
 export async function getSortedPostsData(): Promise<PostData[]> {
-  const fileNames = await fs.readdir(postsDirectory);
+  const fileNames = (await fs.readdir(postsDirectory)).filter((f) => f.endsWith('.md'));
   const allPostsData = await Promise.all(fileNames.map(async (fileName) => {
     const id = fileName.replace(/\.md$/, '');
     const fullPath = path.join(postsDirectory, fileName);
@@ -40,43 +72,31 @@ export async function getSortedPostsData(): Promise<PostData[]> {
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export async function getPostData(id: string): Promise<PostContent> {
+export async function getPostData(id: string): Promise<PostContent | null> {
   const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = await fs.readFile(fullPath, 'utf8');
+  let fileContents: string;
+  try {
+    fileContents = await fs.readFile(fullPath, 'utf8');
+  } catch {
+    return null;
+  }
   const matterResult = matter(fileContents);
   const readTime = readingTime(matterResult.content).text;
 
   return {
     id,
     content: matterResult.content,
+    headings: extractHeadings(matterResult.content),
     readTime,
     ...(matterResult.data as Omit<PostData, 'id' | 'readTime'>),
   };
 }
 
 export async function getAllPostIds(): Promise<{ params: { id: string } }[]> {
-  const fileNames = await fs.readdir(postsDirectory);
+  const fileNames = (await fs.readdir(postsDirectory)).filter((f) => f.endsWith('.md'));
   return fileNames.map((fileName) => ({
     params: {
       id: fileName.replace(/\.md$/, ''),
     },
   }));
-}
-
-export async function getAllTags(): Promise<string[]> {
-  const posts = await getSortedPostsData();
-  const tags = new Set<string>();
-  posts.forEach((post) => {
-    post.tags.forEach((tag: string) => tags.add(tag));
-  });
-  return Array.from(tags);
-}
-
-export async function getAllCategories(): Promise<string[]> {
-  const posts = await getSortedPostsData();
-  const categories = new Set<string>();
-  posts.forEach((post) => {
-    categories.add(post.category);
-  });
-  return Array.from(categories);
 }

@@ -1,5 +1,6 @@
 import { lookup } from "node:dns/promises";
 import AIChatButton from "./AIChatButton";
+import resumeData from "@/data/resumeData.json";
 
 /**
  * The chat route needs Supabase (vector store) and OpenAI to answer. The
@@ -20,17 +21,21 @@ async function chatBackendReachable(): Promise<boolean> {
   }
 }
 
+/** The last line on every page ends on the person, not the framework. */
 export default async function Footer() {
   const chatEnabled = await chatBackendReachable();
+  const { personalInfo } = resumeData;
 
   return (
     <footer className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border pt-6 font-mono text-[11px] text-muted-foreground">
-        <span>© {new Date().getFullYear()} Jung Gu</span>
         <span>
-          Built with Next.js
-          {chatEnabled && " · Ask the chatbot anything about me ↘"}
+          {personalInfo.name} · {personalInfo.location} ·{" "}
+          <a href={`mailto:${personalInfo.email}`} className="transition-colors hover:text-foreground">
+            {personalInfo.email}
+          </a>
         </span>
+        <span>© {new Date().getFullYear()}</span>
       </div>
       {chatEnabled && <AIChatButton />}
     </footer>

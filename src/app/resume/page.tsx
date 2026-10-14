@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { ArrowLeft, Mail, Phone, MapPin, Github, Linkedin, Globe, Download } from 'lucide-react';
 import Link from 'next/link';
@@ -25,7 +23,7 @@ export default function ResumePage() {
     <div className="max-w-4xl mx-auto py-4">
       <div className="flex justify-between items-center mb-6">
         <Link href="/" className="inline-flex items-center font-mono text-xs text-muted-foreground hover:text-foreground transition-colors">
-          <ArrowLeft size={20} className="mr-2" />
+          <ArrowLeft className="mr-1.5 h-3.5 w-3.5" aria-hidden />
           <span>Back to home</span>
         </Link>
 
@@ -152,17 +150,6 @@ export default function ResumePage() {
         </div>
       </div>
 
-      {/* Mobile download button (sticky at bottom for easy access) */}
-      <div className="md:hidden fixed bottom-4 right-4 z-10">
-        <a
-          href={PDF_PATH}
-          download="Jung_Gu_Resume.pdf"
-          className="inline-flex items-center bg-primary text-primary-foreground p-3 rounded-full shadow-lg"
-          aria-label="Download resume"
-        >
-          <Download size={24} />
-        </a>
-      </div>
     </div>
   );
 }

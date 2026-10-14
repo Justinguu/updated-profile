@@ -1,10 +1,10 @@
 ---  
-title: "UV vs pip: The Next Evolution in Python Package Management"  
+title: "uv instead of pip: what changes and how to switch"
 date: "2025-06-20"  
 author: "Justin Gu"  
 tags: ["Python", "Package Management", "UV", "pip", "Development Tools", "Performance"]  
 category: "Python Development"  
-description: "Discover how UV, the lightning-fast Python package manager, outperforms pip with dramatic speed improvements, better dependency resolution, and improved caching. Learn why your Python projects deserve this next-generation tool."  
+description: "Where uv is faster than pip, where it is not a drop-in, and the commands to switch a project over."
 ---
 
 ## Introduction
