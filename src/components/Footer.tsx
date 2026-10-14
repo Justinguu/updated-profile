@@ -3,10 +3,14 @@ import resumeData from "@/data/resumeData.json";
 
 /**
  * The chat answers from the resume JSON with one OpenAI call, so the only
- * thing it needs is the key. No key, no button.
+ * thing it needs is the key. Switched off for now: the OpenAI account has no
+ * credits, so the button would only show visitors an error. Flip CHAT_ENABLED
+ * to true once billing is sorted; the route and the chat box are untouched.
  */
+const CHAT_ENABLED = false;
+
 export default function Footer() {
-  const chatEnabled = !!process.env.OPENAI_API_KEY;
+  const chatEnabled = CHAT_ENABLED && !!process.env.OPENAI_API_KEY;
   const { personalInfo } = resumeData;
 
   return (
