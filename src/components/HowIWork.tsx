@@ -3,24 +3,24 @@ import React from 'react';
 /**
  * The one panel on the home page that the resume does not say outright: how
  * the work gets done. Each line is drawn from a resume fact, phrased as a
- * working habit rather than an achievement.
+ * working habit rather than an achievement, and none of them carries a count.
  */
 const habits = [
   {
-    title: 'One owner, end to end',
-    body: 'Schema, migration, UI, pipeline, and the runbook that retires the old path. I ship the whole feature, not a layer of it.',
+    title: 'Features, end to end',
+    body: 'I take a feature from the schema and migration through the UI, the pipeline, and the rollout, and I keep running it after it ships.',
   },
   {
-    title: 'Built next to the people who use it',
-    body: 'Daily conversations with IT, customer support, operations and division managers decide what gets built and in what order.',
+    title: 'Built with the people who use it',
+    body: 'Day to day I work with IT, customer support, and operations and division managers, so what ships matches how the work is actually done.',
   },
   {
-    title: 'Rehearsed before production',
-    body: 'Every schema change runs against a staging copy first. 176 migrations so far, each one tested that way.',
+    title: 'Tested before it ships',
+    body: 'Every feature is tested thoroughly, and schema changes run against a staging copy before they touch production.',
   },
   {
-    title: 'Test runs cannot reach customers',
-    body: 'Anything that emails or texts people ships behind a flag that routes test runs to one mailbox.',
+    title: 'Written down for the next person',
+    body: 'Cutovers come with a runbook and scheduled jobs with a control panel, so the team can run what I build without me in the loop.',
   },
 ];
 

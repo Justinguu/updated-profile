@@ -53,19 +53,20 @@ const AboutMe: React.FC = () => {
           <p className="mt-2 font-mono text-sm text-muted-foreground">goes by Justin</p>
 
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-foreground/90 sm:text-xl">
-            I build the operations platform behind a medical-device logistics
-            company in C# / .NET and Python, from the PostgreSQL schema to the
-            Azure pipelines that deploy it.
+            I build and run the operations platform behind a medical-device
+            logistics company, in C# / .NET and Python, from the PostgreSQL
+            schema to the Azure pipelines that deploy it.
           </p>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Three years in, I own features end to end alongside the CTO: a .NET 10
-            Blazor app that replaced a legacy Django system, LLM-powered analytics
-            on the Claude API, scheduled jobs on Azure Container Apps, and
+            Three years in, I co-develop a .NET 10 Blazor app with the CTO that
+            replaced a legacy Django system, and I take its features from first
+            design to production and keep them running: LLM-powered analytics on
+            the Claude API, scheduled jobs on Azure Container Apps, and
             zero-downtime releases through GitHub Actions and staging slot swaps.
           </p>
 
-          {/* Ledger: the resume's numbers as fields on the record */}
-          <dl className="rise rise-1 mt-7 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-border pt-5 sm:grid-cols-4">
+
+          <dl className="rise rise-1 mt-7 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-border pt-5 sm:grid-cols-4 lg:hidden">
             {ledger.map(([n, label]) => (
               <div key={label}>
                 <dd className="display text-xl font-bold text-foreground">{n}</dd>
@@ -74,7 +75,7 @@ const AboutMe: React.FC = () => {
             ))}
           </dl>
 
-          <div className="rise rise-2 mt-7 flex flex-wrap items-center gap-3">
+          <div className="rise rise-1 mt-8 flex flex-wrap items-center gap-3">
             <a href="/Jung_Gu_Resume.pdf" download="Jung_Gu_Resume.pdf" className="btn-primary">
               <Download className="h-4 w-4" aria-hidden />
               Download resume
@@ -97,9 +98,10 @@ const AboutMe: React.FC = () => {
           </div>
         </div>
 
-        {/* Portrait: a rounded-rect, not a circle. It reads as the ID photo on a badge. */}
-        <div className="order-first lg:order-none">
-          <div className="relative mx-auto w-40 sm:w-48 lg:w-64">
+        {/* Portrait: a rounded-rect, not a circle. It reads as the ID photo on a badge.
+            The ledger sits under it, so the record's numbers travel with the photo. */}
+        <div className="order-first flex flex-col items-center lg:order-none lg:w-64">
+          <div className="relative w-40 sm:w-48 lg:w-64">
             <Image
               src={heroImage}
               alt="Portrait of Jung (Justin) Gu"
@@ -108,6 +110,14 @@ const AboutMe: React.FC = () => {
               className="aspect-[0.9] w-full rounded-2xl object-cover object-top ring-1 ring-border"
             />
           </div>
+          <dl className="rise rise-2 mt-5 hidden w-full grid-cols-2 gap-x-6 gap-y-3 border-t border-border pt-4 lg:grid">
+            {ledger.map(([n, label]) => (
+              <div key={label}>
+                <dd className="display text-xl font-bold text-foreground">{n}</dd>
+                <dt className="mt-0.5 font-mono text-[11px] text-muted-foreground">{label}</dt>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>

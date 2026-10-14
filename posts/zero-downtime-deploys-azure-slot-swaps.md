@@ -1,6 +1,6 @@
 ---
 title: "Zero-downtime deploys on Azure App Service, and the bug that signed everyone out"
-date: "2026-10-14"
+date: "2026-08-27"
 author: "Justin Gu"
 tags: ["Azure", "App Service", "GitHub Actions", "CI/CD", ".NET", "Blazor"]
 category: "CI/CD"

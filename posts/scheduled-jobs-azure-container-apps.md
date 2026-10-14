@@ -1,6 +1,6 @@
 ---
 title: "Moving our scheduled jobs off a VM and into Azure Container Apps Jobs"
-date: "2026-10-14"
+date: "2026-09-19"
 author: "Justin Gu"
 tags: ["Azure", "Container Apps", "Docker", ".NET", "Python", "Scheduled jobs", "Observability"]
 category: "Containers"
