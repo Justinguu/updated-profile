@@ -58,11 +58,11 @@ const AboutMe: React.FC = () => {
             schema to the Azure pipelines that deploy it.
           </p>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Most of what I build replaces something people used to do by hand.
-            Lately that has meant retiring a legacy Django system with a .NET 10
-            Blazor app, giving staff an LLM that answers questions from company
-            data without ever writing SQL, and shipping releases nobody notices,
-            because nothing goes down.
+            What I enjoy most is the whole life of a feature: sitting in on the
+            first planning conversation, getting to know the people who will
+            use it, and staying close to them through launch and after. The
+            best part is shipping something that takes real work off someone's
+            plate and makes their day easier.
           </p>
 
 
