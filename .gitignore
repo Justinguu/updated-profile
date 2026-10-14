@@ -37,3 +37,6 @@ next-env.d.ts
 
 # generated resume html
 /.resume-build
+
+# local assistant notes
+CLAUDE.md
