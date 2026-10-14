@@ -115,7 +115,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
               Ask me anything about Justin.
             </p>
             <p className="text-sm text-muted-foreground max-w-[260px]">
-              Experience, stack, what he built at Global Med Logistics. Try &ldquo;What has he done with Azure?&rdquo;
+              Experience, stack, what he built at GlobalMed Logistix. Try &ldquo;What has he done with Azure?&rdquo;
             </p>
           </div>
           )}
