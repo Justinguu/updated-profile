@@ -58,12 +58,12 @@ const AboutMe: React.FC = () => {
             schema to the Azure pipelines that deploy it.
           </p>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
-            Three years into my career, I co-develop a .NET 10 Blazor app with
-            the CTO at GlobalMed Logistix. It replaced a legacy Django system,
-            and I take its features from first design to production and keep
-            them running: LLM-powered analytics on the Claude API, scheduled
-            jobs on Azure Container Apps, and zero-downtime releases through
-            GitHub Actions and staging slot swaps.
+            I co-develop a .NET 10 Blazor application that replaced a legacy
+            Django system, and I take its features from first design to
+            production and keep them running. That includes LLM-powered
+            analytics on the Claude API, scheduled jobs on Azure Container
+            Apps, and zero-downtime releases through GitHub Actions and staging
+            slot swaps.
           </p>
 
 
